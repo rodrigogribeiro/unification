@@ -305,7 +305,7 @@ Qed.
 
 Print remove_comm.
 
-Hint Immediate remove_comm.
+Hint Resolve remove_comm.
 
 Lemma minus_remove : forall C2 C1 x, minus (remove x C1) C2 = remove x (minus C1 C2).
 Proof.
@@ -436,8 +436,6 @@ Proof.
   intros ; apply left_lex ; auto.
 Qed.
 
-Print varctxt_lt_constraints_varl.
-
 Lemma varctxt_lt_constraints_varr :
   forall C v t l, member C v ->
                   constraints_lt (mk_constraints (remove v C) (apply_subst_constraint ((v,t) :: nil) l))
@@ -455,8 +453,6 @@ Lemma occurs_wf_ty v C t : wf_ty C t -> ~ occurs v t -> wf_ty (remove v C) t.
 Proof.
   induction t ; mysimp ; try tauto.
 Qed.
-
-Print occurs_wf_ty.
 
 Hint Resolve occurs_wf_ty.
 
@@ -513,17 +509,17 @@ Hint Constructors UnifyFailure.
 
 (** ** Definition of a unifier for a list of constraints *)
 
-Fixpoint unifier (C : varctxt) (cs : list_constr) (s : substitution) : Prop :=
+Fixpoint unifier (cs : list_constr) (s : substitution) : Prop :=
   match cs with
     | nil => True
-    | (t,t') :: cs' => apply_subst s t = apply_subst s t' /\ unifier C cs' s
+    | (t,t') :: cs' => apply_subst s t = apply_subst s t' /\ unifier  cs' s
   end.
 
 (** a simple lemma about unifiers and variable substitutions *)
 
-Lemma unifier_append : forall l v t C s,
-                         unifier (remove v C) (apply_subst_constraint ((v, t) :: nil) l) s ->
-                         unifier C l ((v,t) :: s).
+Lemma unifier_append : forall l v t s,
+                         unifier (apply_subst_constraint ((v, t) :: nil) l) s ->
+                         unifier l ((v,t) :: s).
 Proof.
   induction l ; intros ; mysimp ;
     try (match goal with
@@ -539,9 +535,9 @@ Qed.
 
 Hint Resolve unify_ty.
 
-Lemma unifier_subst : forall l v t C s, apply_subst s (var v) = apply_subst s t ->
-                                        unifier C l s ->
-                                        unifier (remove v C) (apply_subst_constraint ((v,t) :: nil) l) s.
+Lemma unifier_subst : forall l v t s, apply_subst s (var v) = apply_subst s t ->
+                                        unifier l s ->
+                                        unifier (apply_subst_constraint ((v,t) :: nil) l) s.
 Proof.
   induction l ; intros ; mysimp ;
     try (match goal with
@@ -583,8 +579,8 @@ we can either:
 *)
 
 Definition unify_type (c : constraints) := wf_constraints c ->
-           ({ s | unifier (get_ctxt c) (get_list_constr c) s /\ wf_subst (get_ctxt c) s /\
-             forall s', unifier (get_ctxt c) (get_list_constr c) s' ->
+           ({ s | unifier (get_list_constr c) s /\ wf_subst (get_ctxt c) s /\
+             forall s', unifier (get_list_constr c) s' ->
                exists s'', forall v, apply_subst s' (var v) = apply_subst (s ++ s'') (var v)})
            + { UnifyFailure (get_list_constr c) }.
 
@@ -610,15 +606,15 @@ Definition unify_body (l : constraints)
    destruct l as [C l] ; simpl ;
    refine (
        match l as l' return l = l' ->
-          ({ s | unifier C l s /\ wf_subst C s /\
-              forall s', unifier C l s' ->
+          ({ s | unifier l s /\ wf_subst C s /\
+              forall s', unifier l s' ->
               exists s'', forall v, apply_subst s' (var v) = apply_subst (s ++ s'') (var v)} +
                         { UnifyFailure l }) with
           | nil => fun H1 => inleft _ (@exist substitution _ nil _)
           | (t,t') :: l' => fun H1 =>
               match eq_ty_dec t t' return
-                 ({ s | unifier C l s /\ wf_subst C s /\
-                forall s', unifier C l s' ->
+                 ({ s | unifier l s /\ wf_subst C s /\
+                forall s', unifier l s' ->
                  exists s'', forall v, apply_subst s' (var v) = apply_subst (s ++ s'') (var v)})
                     + {UnifyFailure l} with
                 | left _ =>
@@ -629,8 +625,8 @@ Definition unify_body (l : constraints)
                 | right _ =>
                     match t as t1, t' as t1'
                        return t = t1 -> t' = t1' ->
-                         ({ s | unifier C l s /\ wf_subst C s /\
-                           forall s', unifier C l s' ->
+                         ({ s | unifier l s /\ wf_subst C s /\
+                           forall s', unifier l s' ->
                 exists s'', forall v, apply_subst s' (var v) = apply_subst (s ++ s'') (var v)})
                                     + { UnifyFailure l } with
                         | var v, t =>
@@ -674,31 +670,31 @@ Definition unify_body (l : constraints)
         try (do 2 fequals* ; symmetry ; auto ; fail) ; mysimp ; unfold wf_constraints in * ; simpl in * ; mysimp ;
         try (match goal with
              | [H : apply_subst ?s (app _ _) = apply_subst ?s (app _ _),
-                Hu : unifier _ _ ?s,
+                Hu : unifier _ ?s,
                 H1 :  forall s',
                         apply_subst s' _ = apply_subst s' _ /\
-                        apply_subst s' _ = apply_subst s' _ /\ unifier _ _ s' ->
+                        apply_subst s' _ = apply_subst s' _ /\ unifier _ s' ->
                         exists s'',
                           forall v : id, _ |- _ ] =>
                    do 2 rewrite apply_subst_app in H ; injection H ; clear H ;
                    intros Ha Hb ; destruct (H1 _ (conj Hb (conj Ha Hu))) as [sc Hc] ;
-                   exists sc ; intros ; jauto
+                   exists* sc 
                | [H : apply_subst ?s (var _) = apply_subst ?s ?t,
-                  Hu : unifier _ _ ?s,
-                  H1 : forall s', unifier (remove _ _) _ s' -> _ |- _] =>
-                      apply (unifier_subst _ _ _ _ _ H) in Hu ; destruct (H1 _ H4) as [sa Ha] ;
+                  Hu : unifier _ ?s,
+                  H1 : forall s', unifier _ s' -> _ |- _] =>
+                      apply (unifier_subst _ _ _ _ H) in Hu ; destruct (H1 _ H4) as [sa Ha] ;
                       eexists ; intros ; case_if* ; substs ; try rewrite H ;
                       eapply ext_subst_var_ty in Ha ; eauto
                | [H : apply_subst ?s ?t = apply_subst ?s (var _),
-                  Hu : unifier _ _ ?s,
-                  H1 : forall s', unifier (remove _ _) _ s' -> _ |- _] =>
-                       symmetry in H ; apply (unifier_subst _ _ _ _ _ H) in Hu ;
+                  Hu : unifier _ ?s,
+                  H1 : forall s', unifier _ s' -> _ |- _] =>
+                       symmetry in H ; apply (unifier_subst _ _ _ _ H) in Hu ;
                        destruct (H1 _ Hu) as [sa Ha] ; eexists ; intros ; case_if* ; substs ;
                        try rewrite H ; eapply ext_subst_var_ty in Ha ; eauto
              end) ; try (apply wf_constr_list_remove ; auto ; splits*).
 Defined.
 
 Definition unify : forall l : constraints, unify_type l :=
-   well_founded_induction well_founded_constraints_lt unify_type unify_body.
-
+  well_founded_induction well_founded_constraints_lt unify_type unify_body.
+      
 Extraction Language Haskell. Recursive Extraction unify.
