@@ -1,0 +1,254 @@
+\section{A Taste of Coq Proof Assistant}\label{coq}
+
+Coq is a proof assistant based on the calculus of inductive
+constructions (CIC) \ccite{Bertot04}, a higher order typed
+$\lambda$-calculus extended with inductive definitions.  Theorem
+proving in Coq follows the ideas of the so-called
+``BHK-cor\-res\-pon\-dence''\footnote{Abbreviation of Brouwer, Heyting,
+  Kolmogorov, de Bruijn and Martin-L\"of Correspondence. This is also
+  known as the Curry-Howard ``isomorphism''.}, where types represent
+logical formulas, $\lambda$-terms represent proofs
+\ccite{CurryHoward06} and the task of checking if a piece of text is a
+proof of a given formula corresponds to checking if the term that
+represents the proof has the type corresponding to the given formula.
+
+However, writing a proof term whose type is that of a logical formula
+can be a hard task, even for very simple propositions.  In order to
+make the writing of complex proofs easier, Coq provides
+\emph{tactics}, which are commands that can be used to construct proof
+terms in a more user friendly way.
+
+As a tiny example, consider the task of proving the following simple
+formula of propositional logic:
+\[
+(A \to B)\to (B\to C) \to A \to C
+\]
+In Coq, such theorem can be expressed as:
+\begin{lstlisting}
+Section EXAMPLE.
+   Variables A B C : Prop.
+   Theorem example : (A -> B) -> (B -> C) -> A -> C.
+   Proof.
+       intros H H' HA. apply H'. apply H. assumption. 
+   Qed.
+End EXAMPLE.
+\end{lstlisting}
+In the previous source code piece, we have defined a Coq section named
+\texttt{EXAMPLE}\footnote{In Coq, we can use sections to delimit the
+  scope of local variables.} which declares variables \texttt{A},
+\texttt{B} and \texttt{C} as being propositions (i.e. with type
+\texttt{Prop}). Tactic \texttt{intros} introduces variables
+\texttt{H}, \texttt{H'} and \texttt{HA} into the (typing) context,
+respectively with types \texttt{A -> B}, \texttt{B -> C} and
+\texttt{A} and leaves goal \texttt{C} to be proved. Tactic
+\texttt{apply}, used with a term \texttt{t}, generates goal \texttt{P}
+when there exists \texttt{t: P -> Q} in the typing context and the
+current goal is \texttt{Q}. Thus, \texttt{apply H'} changes the goal
+from \texttt{C} to \texttt{B} and \texttt{apply H} changes the goal to
+\texttt{A}. Tactic \texttt{assumption} traverses the typing context to
+find a hypothesis that matches with the goal.
+
+We define next a proof of the previous propositional logical formula
+that, in contrast to the previous proof, that was built using tactics
+(\texttt{intros}, \texttt{apply} and \texttt{assumption}), is coded
+directly as a function:
+\begin{lstlisting}
+   Definition example' : (A -> B) -> (B -> C) -> A -> C :=
+       fun (H : A -> B) (H' : B -> C) (HA : A) => H' (H HA).
+\end{lstlisting}
+However, even for very simple theorems, coding a definition directly
+as a Coq term can be a hard task. Because of this, the use of tactics
+has become the standard way of proving theorems in Coq. Furthermore,
+the Coq proof assistant provides not only a great number of tactics
+but also a domain specific language for scripted proof automation,
+called $\mathcal{L}$tac. In this work, the developed proofs follow the
+style advocated by Chlipala~\cite{Chlipala13}, where most proofs are
+built using $\mathcal{L}$tac scripts, to automate proof steps and make
+them more robust. Details about $\mathcal{L}$tac can be found
+in~\cite{Chlipala13,Bertot04}.
+
+%We briefly illustrate these  notions by means of a small example, shown
+% in Figure \ref{fig:coq-code-ex1}.
+% \begin{figure}[h]
+% \begin{lstlisting}
+% Inductive nat : Set :=
+% 	| O : nat
+% 	| S : nat -> nat.
+
+% Fixpoint plus (n m : nat) : nat :=
+% 	match n with
+% 	   | O => m
+% 	   | S n' => S (plus n' m)
+% 	end. 	  
+	
+% Theorem plus_0_r : forall n, plus n 0 = n.
+% Proof.
+% 	intros n. 
+% 	induction n as [| n'].
+% 	(**Case n = 0**)
+% 		reflexivity.
+% 	(**Case n = S n' **)
+% 		simpl.
+% 		rewrite -> IHn'.
+% 		reflexivity.
+% Qed. 	
+% \end{lstlisting}
+% \centering
+% \caption{Sample Coq code}
+% \label{fig:coq-code-ex1}
+% \end{figure}
+	
+% The source code in Figure~\ref{fig:coq-code-ex1} shows some basic 
+% features of the Coq proof assistant: types, functions and proof definitions. 
+% In this example, a new inductive type is defined to represent 
+% natural numbers in Peano notation. This
+% type is formed by two data constructors: \texttt{O}, that represents the
+% number $0$; and \texttt{S}, the successor function. For instance, in this 
+% notation the number
+% $2$ is represented by the term \texttt{S (S O)} of type \texttt{nat}.
+
+% The command \texttt{Fixpoint} allows the definition of structural recursive
+% functions. Function \texttt{plus} defines the sum of two unary 
+% natural numbers, in a straightforward way. It is noteworthy that, in order 
+% to maintain logical consistency, all functions in Coq must be total. 
+
+% Besides the declaration of inductive types and functions, we can
+% define and prove theorems in Coq. 
+% Figure~\ref{fig:coq-code-ex1} 
+% shows an example of a simple theorem about function \texttt{plus}, namely
+% that, for an arbitrary value \texttt{n} of type \texttt{nat}, we have that 
+% \texttt{plus n 0 = n}. The command \texttt{Theorem} allows 
+% us to state some formula that we want to prove and it starts the 
+% \emph{interactive proof mode}, in which tactics can be used to produce 
+% the wanted proof term. In an interactive section of Coq (after enunciation of
+% theorem \texttt{plus\_O\_r}), we must prove the following goal:
+% \begin{lstlisting}
+%  =============================
+%    forall n : nat, plus n 0 = n 
+% \end{lstlisting}
+% After command \texttt{Proof.}, one can use tactics to build, step by 
+% step, a term of the given type. The first tactic, \texttt{intros}, is used
+% to move premisses and universally quantified variables from the goal to the
+% hypothesis. Now, we need to prove:
+% \begin{lstlisting}
+%  n : nat
+% =============================
+%  plus n 0 = n 
+% \end{lstlisting}
+% The quantified variable \texttt{n} has been moved from the \texttt{goal}
+% to the hypothesis. Now, we can proceed by induction over the structure of 
+% \texttt{n}. This can be achieved by using tactic \texttt{induction}, that
+% generates one goal for each constructor of type \texttt{nat}. This will
+% leave us with the following two goals to be proved:
+% \begin{lstlisting}
+% 2 subgoals
+  
+% ============================
+%    plus 0 0 = 0
+
+% subgoal 2 is:
+%  S n' + 0 = S n'
+% \end{lstlisting}
+% The goal \texttt{plus 0 0 = 0} holds trivaly by the definition of \texttt{plus}.
+% Tactic \texttt{reflexivity} proves trivial equalities, after reducing both sides
+% of the equality to their normal forms. The next goal to be proved is:
+% \begin{lstlisting}
+%  n' : nat
+%  IHn' : plus n' 0 = n'
+% ============================
+%    plus (S n') 0 = S n'
+% \end{lstlisting}
+% The hypothesis \texttt{IHn'} is the automatically generated induction hypothesis for 
+% this theorem. In order to finish this proof, we need to transform the goal to
+% use the inductive hypothesis. To do this, we use the tactic \texttt{simpl}, which performs
+% reductions based on the definition of function \texttt{plus}. This changes the goal 
+% to:
+% \begin{lstlisting}
+%  n' : nat
+%  IHn' : plus n' 0 = n'
+% ============================
+%    S (plus n' 0) = S n'
+% \end{lstlisting}
+% Since the goal now has as a subterm the exact left hand side of the hypothesis
+% \texttt{IHn'}, we can use the \texttt{rewrite} tactic, which replaces some term by
+% another using some equality in the hypothesis. Now, we have the following goal: 
+% \begin{lstlisting}
+%  n' : nat
+%  IHn' : plus n' 0 = n'
+% ============================
+%    S n' = S n'
+% \end{lstlisting}
+% This can be proved immediately using the \texttt{reflexivity} tactic. 
+% This tactic script builds the following term:
+% \begin{lstlisting}
+% fun n : nat =>
+% 	nat_ind 
+% 	(fun n0 : nat => n0 + 0 = n0) (eq_refl 0)
+% 	  (fun (n' : nat) (IHn' : n' + 0 = n') =>
+% 	   eq_ind_r (fun n0 : nat => S n0 = S n') 
+% 	     (eq_refl (S n')) IHn') n
+% 	     : forall n : nat, n + 0 = n
+% \end{lstlisting}
+% Instead of using tactics, one could instead write CIC terms directly
+% to prove theorems.  This is however a complex task, even for simple
+% theorems like \mbox{\texttt{plus\_O\_r}}, since the manual writing of
+% proof terms requires know\-ledge of the CIC type system.  Thus,
+% tactics frees us from the details of constructing type correct CIC
+% terms.
+
+% An interesting feature of Coq is the possibility of defining inductive
+% types that mix computational and logic parts. This allows us to define
+% functions that compute values together with a proof that this value
+% has some desired property. Type \texttt{sig}, also called ``subset
+% type'', is defined in Coq's standard library as:
+% \begin{lstlisting}
+% Inductive sig (A : Set) 
+% 		(P : A -> Prop) : Set :=
+% 	| exist : forall x : A, P x -> sig A P.
+% \end{lstlisting}
+% The \texttt{exist} constructor takes two arguments: the value \texttt{x}
+% of type \texttt{A} --- that represents the computational part --- and
+% an argument of type \texttt{P x} --- the ``certificate'' that the value
+% \texttt{x} has the property specified by the predicate \texttt{P}. 
+% As an example of a \texttt{sig} type, consider:
+% \begin{lstlisting}
+% forall n : nat, n <> 0 -> {p | n = S p}.
+% \end{lstlisting}
+
+% %This uses the Notation:
+% %  "{ x : A | P }" := sig (fun x : A => P) 
+% %That is, it is equivalent to:
+% %\begin{lstlisting}
+% %forall n : nat, n <> 0 -> sig (fun (S p) => n)
+% %\end{lstlisting}
+
+% This type represents a function that returns the predecessor of a natural
+% number \texttt{n}, together with a proof that the returned value \texttt{p} really
+% is the predecessor of \texttt{n}. Defining functions using the \texttt{sig} type
+% requires writing the corresponding logical certificate. As with theorems,
+% we can use tactics to define such functions. 
+% \begin{lstlisting}
+% Definition pred_certified : 
+% 	forall n : nat, n <> 0 -> {p | n = S p}.
+%    intros n H. 
+%    destruct n as [| n']. 
+%    (**Case n = 0**)
+%    elim H. reflexivity.
+%    (**Case n = S n'**)
+%    exists n'. reflexivity. 
+% Defined.
+% \end{lstlisting}
+
+% Using the command \texttt{Extraction pred\_certified} we can discard 
+% the logical part of this function definition and get a certified
+% implementation of this function in OCaml~\cite{OCaml}, Haskell~\cite{Haskell98} or Scheme~\cite{Scheme}. 
+% The OCaml code of this function, obtained through extraction, is the following:
+
+% % pred_cert below should be: pred_certified
+
+% \begin{lstlisting}
+% (** val pred_cert : nat -> nat **)
+% let pred_cert = function
+% 	| O -> assert false (* absurd case *)
+% 	| S n0 -> n0
+% \end{lstlisting}

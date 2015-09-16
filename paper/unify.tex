@@ -1,0 +1,84 @@
+\documentclass{llncs}
+
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{float}
+
+\begin{document}
+
+\lstset{tabsize=3,
+	    language=,
+	    basicstyle=\footnotesize\ttfamily}
+
+\mainmatter
+
+\title{A Mechanized Textbook Proof of a \\Type Unification Algorithm}
+
+
+\author{Rodrigo Ribeiro\inst{1} \and Carlos Camar\~ao\inst{2}}
+
+\institute{Universidade Federal de Ouro Preto, Jo\~ao Monlevade, Minas Gerais,
+  Brazil\\
+\email{rodrigo@decsi.ufop.br},
+\and
+Universidade Federal de Minas Gerais, Belo Horizonte, Minas Gerais, Brazil\\
+\email{camarao@dcc.ufmg.br}}
+
+\maketitle  
+
+\begin{abstract}
+Unification is the core of type inference algorithms for modern
+functional programming languages, like Haskell. As a first step
+towards a formalization of a type inference algorithm for such
+programming languages, we present a formalization in Coq of a type
+unification algorithm that follows classic algorithms presented in
+programming language textbooks.
+\end{abstract}
+
+\newcommand{\defas}{\ensuremath{\overset{def}{=}}}
+\newcommand{\fv}{\ensuremath{\text{FV}}}
+\newcommand{\fvc}{\ensuremath{\text{FVC}}}
+\newcommand{\eeq}{\ensuremath{\overset{e}{=}}}
+\newcommand{\append}{\ensuremath{\texttt{ ++ }}}
+\newcommand{\V}{\ensuremath{\mathcal{V}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\wf}{\ensuremath{\text{\it wf\/}}}
+\newcommand{\If}{\ensuremath{\text{if }}}
+\newcommand{\Let}{\ensuremath{\text{let }}}
+\newcommand{\In}{\ensuremath{\text{in }}}
+\newcommand{\Then}{\ensuremath{\text{ then }}}
+\newcommand{\Else}{\ensuremath{\text{ else }}}
+\newcommand{\fail}{\ensuremath{\text{fail}}}
+\newcommand{\unify}{\ensuremath{\text{\it unify\/}}}
+\newcommand{\Occurs}{\ensuremath{\text{\it ocurrs\/}}}
+\newcommand{\dom}{\ensuremath{\text{\it dom\/}}}
+\newcommand{\size}{\ensuremath{\text{\it size\/}}}
+\newcommand{\unifier}{\ensuremath{\text{\it unifier\/}}}
+\newcommand{\True}{\ensuremath{\text{\tt True}}}
+\newcommand{\False}{\ensuremath{\text{\tt False}}}
+\newtheorem{Lemma}{Lemma}
+\newtheorem{Theorem}{Theorem}
+\newtheorem{Corollary}{Corollary}
+\newtheorem{Definition}{Definition}
+\newtheorem{Notation}{Notation Conventions}
+\newcommand{\ccite}[1]{\cite{#1}}
+
+\input{introduction}
+\input{coq-taste}
+\input{definitions}
+\input{algorithm}
+\input{termination}
+\input{soundness}
+\input{tactics}
+\input{related}
+\input{conclusion}
+
+
+\bibliographystyle{splncs}      % mathematics and physical sciences
+%\bibliographystyle{spphys}       % APS-like style for physics
+\bibliography{unify}   % name your BibTeX data base
+
+\end{document}

@@ -1,0 +1,289 @@
+ \section{Definitions}\label{definitions}
+
+\subsection{Types}\label{types}
+
+We consider a language of simple types formed by type variables, type
+constants (also called type constructors) and functional types given
+by the following grammar:
+\[
+\begin{array}{rcl}
+  \tau & ::= & \alpha\,\mid\,c\,\mid\,\tau\to\tau
+\end{array}
+\]
+where $\alpha$ stands for a type variable and $c$ a type
+constructor. All meta-variables ($\tau,\,\alpha$ and $c$) can appear
+primed or subscripted and as usual we consider that $\to$ associates
+to the right. 
+
+Identifiers for variables and constructors are represented as natural
+numbers, following standard practice in formalized
+meta-theory~\ccite{deBruijn72,locally}. We are aware that choosing
+this representation of types is not adequate to represent Haskell's
+types, since it does not allow the occurrence of $n$-ary type
+constructors. Using $n$-ary type constructors will only clutter
+definitions due to the need of using kinds\footnote{Kinds classify
+  type expressions in the same way as types classify terms. More
+  details about the use of kinds and high-order operators can be found
+  in~\cite{Pierce02}.}. Since the presence of kind information is
+orthogonal to unification, we prefer to omit it in order to clarify
+definitions and proofs.
+
+The list of type variables of type $\tau$ is denoted by \fv$(\tau)$.
+
+The $\size$ of a given type $\tau$, given by the number of arrows,
+type variables and constructors in $\tau$, is denoted by
+$\size(\tau)$. Formally:
+
+\[ \begin{array}[t]{llp{.7\textwidth}} 
+     \size(\tau_1 \to \tau_2) & = & $1 + \size(\tau_1) + \size(\tau_2)$ \\
+     \size(\tau)              & = & $1$ otherwise ($\tau=\alpha$ or $\tau=c$, 
+                                        for some $\alpha, c$)
+   \end{array}
+\]
+
+We let $\tau_1 \eeq \tau_2$ denote the equality constraint between two
+types $\tau_1$ and $\tau_2$.
+
+Lists of equality constraints are represented by meta-variable
+$\mathbb{C}$. We use the left-associative operator $::$ for
+constructing lists: $a::x$ denotes the list formed by head $a$ and
+tail $x$.
+
+The definition of free type variables for constraints and their lists
+are defined in a standard way and the size of constraints and
+constraint lists are defined as the sum of their constituent
+types. The following simple lemmas will be later used to establish
+termination of the unification algorithm, defined in Section
+\ref{algorithm-section}.
+
+\begin{Lemma}\label{appsize}
+For all types $\tau_1,\tau_1', \tau_2,\tau_2'$ and all lists of constraints
+$\mathbb{C}$ we have that: \[\size( (\tau_1\eeq \tau_1') :: (\tau_2\eeq \tau_2') :: \mathbb{C}) 
+                           < \size( (\tau_1\to\tau_2 \eeq \tau_1'\to\tau_2') :: \mathbb{C})\]
+\end{Lemma}
+\begin{proof}
+Induction over $\mathbb{C}$ using the definition of $\size$.
+\end{proof}
+
+\begin{Lemma}\label{lengthsize}
+For all types $\tau,\tau'$ and all lists of constraints $\mathbb{C}$
+we have that
+\[\size(\mathbb{C}) < \size( (\tau\eeq\tau') :: \mathbb{C})\]
+\end{Lemma}
+\begin{proof}
+Induction over $\tau$ and case analysis over $\tau'$, using the
+definition of $\size$.
+\end{proof}
+
+\subsection{Substitutions}\label{substitution}
+
+Substitutions are functions mapping type variables to types. For
+convenience, a substitution is considered as a finite mapping
+$[\alpha_1\,\mapsto\,\tau_1,...,\alpha_n\,\mapsto\,\tau_n]$, for
+$i=1,\ldots,n$, 
+which is also abbreviated
+as $[\overline{\alpha}\mapsto\overline{\tau}]$ ($\overline{\alpha}$
+and $\overline{\tau}$ denoting sequences built from sets
+$\{\alpha_1,...,\alpha_n\}$ and $\{\tau_1,...,\tau_n\}$,
+respectively). Meta-variable $S$ is used to denote substitutions.
+
+In our formalization, a mapping $[\alpha\mapsto\tau]$ is represented
+as a pair of a variable and a type. Substitutions are represented as
+lists of mappings, taking advantage of the fact that a variable never
+appears twice in a substitution.  The domain of a substitution,
+denoted by $\dom(S)$, is defined as:
+\[ dom(S) = \{\alpha\,|\,S(\alpha) = \tau, \alpha\not=\tau\} \]
+
+Following~\ccite{McBride03}, we define {\em substitution
+  application\/} in a variable-by-variable way; first, let the
+application of a mapping $[\alpha\mapsto\tau']$ to $\tau$ be defined
+by recursion over the structure of $\tau$:
+
+\[ \begin{array}[t]{llp{.5\textwidth}}
+      \symbol{91}\alpha\mapsto \tau'\symbol{93}\,(\tau_1\rightarrow \tau_2) & = & 
+        $([\alpha\mapsto \tau']\:\tau_1) \to ([\alpha \mapsto \tau']\:\tau_2)$ \\
+      \symbol{91}\alpha\mapsto \tau'\symbol{93}\,\alpha & = & $\tau'$ \\
+      \symbol{91}\alpha\mapsto \tau'\symbol{93}\,\tau   & = & $\tau$ 
+        \text{ otherwise (\begin{tabular}[t]{l}
+                                  $\tau = \alpha'$ for some $\alpha'\not=\alpha$, or \\
+                                  $\tau = c$ for some $c$)
+                          \end{tabular}}
+   \end{array}
+\]
+
+Next, substitution application follows by recursion on the number of
+mappings of the substitution, using the above defined application of a
+single mapping:
+
+\[
+   S(\tau) = \left\{
+             \begin{array}{ll}
+               \tau & \text{ if } S = [\,]\\
+              S'([\alpha\mapsto\tau']\:\tau) & \text{ if }S = [\alpha\mapsto\tau'] :: S'
+             \end{array}
+           \right.
+\]
+
+Application of a substitution to an equality constraint is defined in
+a straightfoward way:
+
+\[ S\:(\tau\eeq \tau') = S(\tau)\eeq S(\tau') \]
+
+In order to maintain our development on a fully constructive ground,
+we use the following lemma, to cater for proofs of equality of
+substitutions. This lemma is used to prove that the result of the
+unification algorithm yields the most general unifier of a given set
+of types.
+
+\begin{Lemma}\label{extsubst}
+For all substitutions $S$ and $S'$, if $S(\alpha)=S'(\alpha)$ for all
+variables $\alpha$, then $S(\tau) = S'(\tau)$ for all types $\tau$.
+\end{Lemma}
+\begin{proof}
+Induction over $\tau$, using the definition of substitution
+application.
+\end{proof}
+
+Substitutions and types are subject to well-formedness conditions,
+described in the next section.
+
+\subsection{Well-Formedness Conditions}
+
+Now, we consider notions of well-formedness with regard to types,
+substitutions and constraints. These notions are crucial to give
+simple proofs for termination, soundness and completeness of the
+unification algorithm.
+
+Well-formed conditions are expressed in terms of a type variable
+context, \V, that contains, in each step of the execution of the
+unification algorithm, the {\em complement\/} of the set of type
+variables that are in the domain of the unifier. This context is used
+to formalize some notions that are assumed as immediate facts in
+textbooks, like: ``at each recursive call of the unification
+algorithm, the number of distinct type variables occurring in
+constraints decreases'' or ``after applying a substitution $S$ to a
+given type $\tau$, we have that $FV(S(\tau)) \cap dom(S) =
+\emptyset$''.
+
+We consider that:
+
+\begin{itemize}
+
+  \item A type $\tau$ is well-formed in \V, written as
+    $\wf(\V,\tau)$, if all type variables that occur in $\tau$ are
+    in \V.
+
+  \item A constraint $\tau_1 \eeq
+    \tau_2$ is well-formed, written as $\wf(\V,\tau_1 \eeq \tau_2)$, if
+    both $\tau_1$ and $\tau_2$ are well-formed in $\V$.
+
+  \item A list of constraints $\C$ is well-formed in
+    $\V$, written as $\wf(\V,\C)$, if all of its equality constraints
+    are well-formed in $\V$.
+
+  \item A substitution $S = \{[\alpha\mapsto \tau]\}:: S'$ is well-formed in $\V$,
+    written as $\wf(\V,S)$, if the following conditions apply:
+     \begin{itemize}
+       \item $\alpha\in\V$
+       \item $\wf(\V - \{\alpha\},\tau)$
+       \item $\wf(\V-\{\alpha\},S')$ 
+     \end{itemize}
+  \end{itemize}
+
+The requirement that type $\tau$ is well-formed in $\V - \{\alpha\}$
+is necessary in order for $[\alpha\mapsto \tau]$ to be a well-formed
+substitution. This avoids cyclic equalities that would introduce
+infinite type expressions.
+
+The well-formedness conditions are defined as recursive Coq functions
+that compute dependent types from a given variable context and a type,
+constraint or substitution.
+
+A first application of these well-formedness conditions is to enable a
+simple definition of composition of substitutions.  Let $S_1$ and
+$S_2$ be substitutions such that $\wf(\V,S_1)$ and
+$\wf(\V-\dom(S_1),S_2)$. The composition $S_2 \circ S_1$ can be
+defined simply as the append operation of these substitutions:
+\[ S_2 \circ S_1 = S_1\: \texttt{++}\: S_2 \]
+The idea of indexing substitutions by type variables that can appear
+in its domain and its use to give a simple definition of composition
+was proposed in~\ccite{McBride03}. 
+
+We say that a substitution $S$ is more general than $S'$, written as
+$S\leq S'$, if there exists a substitution $S_1$ such that $S' = S_1
+\circ S$.  
+
+The definition of composition of substitutions satisfies the following
+theorem:
+
+\begin{Theorem}[Substitution Composition and Application]
+For all types $\tau$ and all substitutions $S_1$, $S_2$ such that
+$\wf(\V,S_1)$ and $\wf(\V-\dom(S_1),S_2)$ we have that $(S_2 \circ
+S_1)\,(\tau) = S_2 (S_1 (\tau))$.
+\end{Theorem}
+\begin{proof}
+By induction over the structure of $S_2$.
+\end{proof}
+
+\subsection{Occurs Check}
+
+\newcommand{\occurs}{\text{\it occurs\/}}
+
+Type unification algorithms use a well-known occurs check in order to
+avoid the generation of cyclic mappings in a substitution, like
+$[\alpha\mapsto\alpha\to\alpha]$. In the context of finite type
+expressions, cyclic mappings do not make sense. In order to define the
+occurs check, we first define a dependent type, $occurs(\alpha,\tau)$,
+that is inhabited\footnote{According to the BHK-interpretation, a type
+  is inhabited only if it represents a logic proposition that is
+  provable.} only if $\alpha\in\fv(\tau)$:
+
+\[ \begin{array}{llp{.7\textwidth}}
+      \occurs (\alpha,\tau_1\to\tau_2) & = & $\occurs(\alpha,\tau_1) \lor occurs(\alpha,\tau_2)$ \\
+      \occurs (\alpha,\alpha)         & = & $\True$ \\
+      \occurs (\alpha, \tau)          & = & $\False$ otherwise\\
+                                      &   & $\:\:\:\:$ i.e.~if $\tau = \alpha'$ for some $\alpha'\neq\alpha$ or $\tau = c$ for some $c$
+  \end{array}
+\]
+
+Coq types $\True$ and $\False$ are the unit and empty type\footnote{In
+  type theory terminology, the unit type is a type that has a unique
+  inhabitant and the empty type is a type that does not have
+  inhabitants. Under BHK-interpretation, they correspond to a true and
+  false propositions, respectively \cite{CurryHoward06}.},
+respectively. Note that $occurs(\alpha,\tau)$ is provable if and only if $\alpha \in \fv(\tau)$.
+
+Using type $occurs$, decidability of the occurs check can be
+established, by using the following theorem:
+
+\begin{Lemma}[Decidability of occurs check]
+   For all variables $\alpha$ and all types $\tau$, we have that
+   either $occurs(\alpha,\tau)$ or $\neg\,occurs(\alpha,\tau)$ holds.
+\end{Lemma}
+\begin{proof}
+    Induction over the structure of $\tau$.
+\end{proof}
+
+If a variable $\alpha$ does not occur in a well-formed type, this type
+is well-formed in a variable context where $\alpha$ does not occur.
+This simple fact is an important step used to prove termination of
+unification. The next lemmas formalize this notion.
+
+\begin{Lemma}\label{remlemma}
+For all variables $\alpha_1,\alpha_2$ and all variable contexts $\mathcal{V}$,
+if $\alpha_1\in\mathcal{V}$ and $\alpha_2 \neq \alpha_1$ then
+$\alpha_1 \in (\mathcal{V} - \{\alpha_2\})$.
+\end{Lemma}
+\begin{proof}
+Induction over $\mathcal{V}$.
+\end{proof}
+
+\begin{Lemma}
+Let $\tau$ be a well-formed type in a variable context $\mathcal{V}$
+and let $\alpha$ be a variable such that $\neg
+occurs(\alpha,\tau)$. Then $\tau$ is well-formed in $\mathcal{V}-\{\alpha\}$.
+\end{Lemma}
+\begin{proof}
+    Induction on the structure of $\tau$, using Lemma \ref{remlemma}
+    in the variable case.
+\end{proof}

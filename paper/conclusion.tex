@@ -1,0 +1,21 @@
+\section{Conclusion}\label{conclusion}
+
+We have given a complete formalization of termination, soundness and
+completeness of a type unification algorithm in the Coq proof
+assistant. To the best of our knowledge, the proposed formalization is
+the first to follow the structure of termination proofs presented in
+classical textbooks on type systems~\ccite{Pierce02,Mitchell96}. Soundness and completeness proofs of
+unification are coupled with the algorithm definition and are filled
+by scripted proof tactics using previously proved lemmas.
+
+The developed formalization has 610 lines of code and around 94 lines of comments.
+The formalization is composed of 31 lemmas and theorems, 34 type and
+function definitions and 2 inductive types. Most of the implementation
+effort has been done on proving termination, which takes 293 lines of
+our code, expressed in 21 theorems. Compared with Kothari's
+implementation, that is written in more than 1000 lines, our code is
+more compact.
+
+We intend to use this formalization to develop a complete type
+inference algorithm for Haskell in the Coq proof assistant. The
+developed work is available online~\ccite{unify-rep}.
