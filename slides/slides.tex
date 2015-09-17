@@ -7,6 +7,18 @@
 \usepackage{latexsym}
 \usepackage{hyperref}
 
+\usepackage{xcolor}
+
+\makeatletter
+\def\mathcolor#1#{\@mathcolor{#1}}
+\def\@mathcolor#1#2#3{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\makeatother
+
 \usepackage{listings}
 \usepackage{lstcoq}
 \lstset{Language=Coq}
@@ -36,7 +48,7 @@
 \newcommand{\Else}{\ensuremath{\text{ else }}}
 \newcommand{\fail}{\ensuremath{\text{fail}}}
 \newcommand{\unify}{\ensuremath{\text{\it unify\/}}}
-\newcommand{\Occurs}{\ensuremath{\text{\it ocurrs\/}}}
+\newcommand{\Occurs}{\ensuremath{\text{\it occurs\/}}}
 \newcommand{\dom}{\ensuremath{\text{\it dom\/}}}
 \newcommand{\size}{\ensuremath{\text{\it size\/}}}
 \newcommand{\unifier}{\ensuremath{\text{\it unifier\/}}}
@@ -180,7 +192,7 @@
           \end{itemize}
      \end{frame}
      \begin{frame}{Definitions}
-For all types $\tau_1,\tau_1', \tau_2,\tau_2'$ and all lists of constraints
+\textbf{Lemma:} For all types $\tau_1,\tau_1', \tau_2,\tau_2'$ and all lists of constraints
 $\mathbb{C}$ we have that: 
 
 \[\size( (\tau_1\eeq \tau_1') :: (\tau_2\eeq \tau_2') :: \mathbb{C}) 
@@ -189,7 +201,7 @@ $\mathbb{C}$ we have that:
 \textbf{Proof:} Induction over $\mathbb{C}$ using the definition of $\size$.
      \end{frame}
      \begin{frame}{Definitions}
-For all types $\tau,\tau'$ and all lists of constraints $\mathbb{C}$
+\textbf{Lemma:} For all types $\tau,\tau'$ and all lists of constraints $\mathbb{C}$
 we have that
 \[\size(\mathbb{C}) < \size( (\tau\eeq\tau') :: \mathbb{C})\]
 
@@ -226,7 +238,7 @@ definition of $\size$.
      \begin{frame}{Substitution Application}
          \begin{itemize}
               \item Defined in a variable-by-variable way by recursion
-                on the substitution.
+                on the appplied substitution.
 \[
    S(\tau) = \left\{
              \begin{array}{ll}
@@ -240,13 +252,116 @@ definition of $\size$.
      \begin{frame}{Extensionality Lemma}
        \begin{itemize}
            \item Used to state completeness of unification.
-           \item Not necessary if we allow ourselfs to postulate
-             function extensionality
+           \item Not necessary if we allow ourselves to postulate
+             function extensionality.
         \end{itemize}
-For all substitutions $S$ and $S'$, if $S(\alpha)=S'(\alpha)$ for all
+\textbf{Lemma:} For all substitutions $S$ and $S'$, if $S(\alpha)=S'(\alpha)$ for all
 variables $\alpha$, then $S(\tau) = S'(\tau)$ for all types $\tau$.
 
 \noindent\textbf{Proof:}Induction over $\tau$, using the definition of substitution
 application.
+     \end{frame}
+     \begin{frame}{Well-Formedness Conditions}
+          \begin{itemize}
+              \item Conditions imposed on types, constraints and
+                substitutions to give simple proofs for termination,
+                soundness and completeness.
+              \item During the execution of $\unify$ the variable
+                context holds the complement of unifier domain.
+          \end{itemize}
+     \end{frame}
+     \begin{frame}{Well-Formedness Conditions}
+          \begin{itemize}
+             \item A type $\tau$ is well-formed in \V, written as
+               $\wf(\V,\tau)$, if all type variables that occur in $\tau$ are
+               in \V.
+             \item A constraint $\tau_1 \eeq
+               \tau_2$ is well-formed, written as $\wf(\V,\tau_1 \eeq \tau_2)$, if
+               both $\tau_1$ and $\tau_2$ are well-formed in $\V$.
+          \end{itemize}
+     \end{frame}
+     \begin{frame}{Well-Formedness Conditions}
+          \begin{itemize}
+              \item A list of constraints $\C$ is well-formed in
+                $\V$, written as $\wf(\V,\C)$, if all of its equality constraints
+                are well-formed in $\V$.
+          \end{itemize}
+     \end{frame}
+     \begin{frame}{Well-Formedness Conditions}
+          \begin{itemize}
+              \item A substitution $S = \{[\alpha\mapsto \tau]\}:: S'$ is well-formed in $\V$,
+                written as $\wf(\V,S)$, if the following conditions apply:
+                \begin{itemize}
+                    \item $\alpha\in\V$
+                    \item $\wf(\V - \{\alpha\},\tau)$
+                    \item $\wf(\V-\{\alpha\},S')$ 
+                \end{itemize}
+          \end{itemize}
+     \end{frame}
+     \begin{frame}{Substitution Composition}
+          \begin{itemize}
+               \item Let $S_1$ be a substitution such that
+                 $\wf(\V,S_1)$;
+                \item Let $S_2$ a substitution such that $\wf(\V -
+                  \dom(S_1),S_2)$.
+                \item We can define composition as:
+                 \[ S_2 \circ S_1 = S_1\: \texttt{++}\: S_2 \]
+           \end{itemize}
+     \end{frame}
+     \begin{frame}{Substitution Composition}
+\textbf{Theorem:} For all types $\tau$ and all substitutions $S_1$, $S_2$ such that
+$\wf(\V,S_1)$ and $\wf(\V-\dom(S_1),S_2)$ we have that $(S_2 \circ
+S_1)\,(\tau) = S_2 (S_1 (\tau))$.
+
+\noindent\textbf{Proof:}By induction over the structure of $S_2$.
+     \end{frame}
+     \begin{frame}{Occurs Check}
+          \begin{itemize}
+              \item Avoids the generation of cyclic mappings like
+                $[\alpha\mapsto\alpha\to\alpha]$.
+              \item $\Occurs(\alpha,\tau)$ is inhabited iff
+                $\alpha\in\fv(\tau)$:
+          \end{itemize}
+\[ \begin{array}{llp{.7\textwidth}}
+      \Occurs (\alpha,\tau_1\to\tau_2) & = & $\Occurs(\alpha,\tau_1) \lor \Occurs(\alpha,\tau_2)$ \\
+      \Occurs (\alpha,\alpha)         & = & $\True$ \\
+      \Occurs (\alpha, \tau)          & = & $\False$ otherwise\\
+  \end{array}
+\]
+     \end{frame}
+     \begin{frame}{Occurs Check}
+        \begin{itemize}
+             \item Occurs check is crucial to prove termination of
+               unification.
+             \item Next lemma is important to relate application of a 
+                      substitution and occurs check.
+        \end{itemize}
+        \textbf{Lemma:} Let $\tau$ be s.t. $\wf(\V,\tau)$ and
+        $\neg\Occurs(\alpha,\tau)$. Then $\wf(\V-\{\alpha\},\tau)$.
+
+        \noindent\textbf{Proof:} Induction over the structure of $\tau$.
+     \end{frame}
+     \begin{frame}{Unification Algorithm}
+\[
+\small{
+\begin{array}{ll}
+(1) & \unify([\: ]) = [\: ]\\
+(2) & \unify((\alpha \eeq \alpha) :: \mathbb{C}) = \unify(\mathbb{C})\\
+(3) & \unify((\alpha \eeq\tau) :: \mathbb{C}) = 
+      \If \Occurs(\alpha,\tau) \Then \fail \Else \\
+     & \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\mathcolor{red}{\unify([\alpha\mapsto\tau]\mathbb{C})}\circ [\alpha \mapsto \tau]\\
+(4) & \unify((\tau \eeq\alpha) :: \mathbb{C}) = 
+      \If \Occurs(\alpha,\tau) \Then \fail \Else \\
+      & \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\mathcolor{red}{\unify([\alpha\mapsto\tau]\mathbb{C})}\circ [\alpha \mapsto \tau]\\
+(5) & \unify((\tau_1\to\tau_2 \eeq \tau\to\tau')::\mathbb{C}) = \\
+      & \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\mathcolor{red}{\unify((\tau_1\eeq\tau)::(\tau_2\eeq\tau')::\mathbb{C})} \\
+(6) & \unify((\tau \eeq \tau')::\mathbb{C}) = \If \tau\equiv\tau' \Then \unify(\mathbb{C}) \Else \fail 
+\end{array}}
+\]
+\begin{center}
+Coq's termination checker rejects calls in \textcolor{red}{red}.
+\end{center}
+     \end{frame}
+     \begin{frame}{Termination}
      \end{frame}
 \end{document}
