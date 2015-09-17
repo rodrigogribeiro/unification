@@ -2,3 +2,12 @@
 *~
 *.glob
 .DS_Store
+*.aux
+*.log
+*.nav
+*.pdf
+*.nav
+*.out
+*.vrb
+*.toc
+*.snm

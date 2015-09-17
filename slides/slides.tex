@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{latexsym}
 \usepackage{hyperref}
+\usepackage{graphicx}
 
 \usepackage{xcolor}
 
@@ -18,6 +19,9 @@
   \endgroup
 }
 \makeatother
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{$#2$}}%
+\newcommand*{\Resize}[2]{\resizebox{#1}{!}{$#2$}}%
+
 
 \usepackage{listings}
 \usepackage{lstcoq}
@@ -147,8 +151,8 @@
              \begin{itemize}
                   \item Types models logical formulas.
                   \item Terms models proofs.
+                  \item Proof checking consists of type checking terms.
              \end{itemize}
-             \item Proof checking consists of type checking terms.
              \item Provides \textbf{tactics} to ease proof
                construction.
              \begin{itemize}
@@ -206,8 +210,8 @@
 \textbf{Lemma:} For all types $\tau_1,\tau_1', \tau_2,\tau_2'$ and all lists of constraints
 $\mathbb{C}$ we have that: 
 
-\[\size( (\tau_1\eeq \tau_1') :: (\tau_2\eeq \tau_2') :: \mathbb{C}) 
-                           < \size( (\tau_1\to\tau_2 \eeq \tau_1'\to\tau_2') :: \mathbb{C})\]
+\[\Resize{\textwidth}{\size( {(\tau_1\eeq \tau_1') :: (\tau_2\eeq \tau_2') :: \mathbb{C}}) 
+                           < \size( (\tau_1\to\tau_2 \eeq \tau_1'\to\tau_2') :: \mathbb{C})}\]
 
 \textbf{Proof:} Induction over $\mathbb{C}$ using the definition of $\size$.
      \end{frame}
@@ -249,7 +253,7 @@ definition of $\size$.
      \begin{frame}{Substitution Application}
          \begin{itemize}
               \item Defined in a variable-by-variable way by recursion
-                on the appplied substitution.
+                on the applied substitution.
 \[
    S(\tau) = \left\{
              \begin{array}{ll}
@@ -404,9 +408,9 @@ that
 \[\mathcolor{red}{\unify((\tau_1\eeq\tau)::(\tau_2\eeq\tau')::\mathbb{C})} \]
           \end{itemize}
 \noindent \textbf{Lemma:}For all well-formed $\tau_1, \tau_2, \tau_1', \tau_2'$ and all well-formed $\mathbb{C}$, 
-\[\degree((\tau_1\eeq\tau_1',\tau_2\eeq\tau_2') :: \mathbb{C})
+\[\Resize{\textwidth}{\degree((\tau_1\eeq\tau_1',\tau_2\eeq\tau_2') :: \mathbb{C})
 \prec
-\degree((\tau_1\to\tau_2\eeq\tau_1'\to\tau_2') :: \mathbb{C})\]
+\degree((\tau_1\to\tau_2\eeq\tau_1'\to\tau_2') :: \mathbb{C})}\]
      \end{frame}
      \begin{frame}{Soundness and Completeness}
          \begin{itemize}
@@ -415,9 +419,11 @@ that
              \item A substitution $S$ is a unifier iff
                $\unifier(\C,S)$ is provable               
          \end{itemize}
-\[ \begin{array}{lcl}
+\[ \begin{array}{lclc}
      \unifier([],S)                             & = & \True \\
-     \unifier((\tau\eeq\tau') :: \mathbb{C}',S) & = & S(\tau) = S(\tau') \land \unifier(\mathbb{C}',S)
+     \unifier((\tau\eeq\tau') :: \mathbb{C}',S) & = & S(\tau) =
+                                                      S(\tau') & \land \\
+ & & \unifier(\mathbb{C}',S)
   \end{array} 
 \]
      \end{frame}
@@ -428,9 +434,12 @@ that
             \item Least unifier definition
         \end{itemize}
 \[
-  \least(S,\mathbb{C}) = 
-    \forall S'.\,\unifier(\mathbb{C},S') \to 
-       \exists S_1.\, \forall \alpha.\,(S_1 \circ S)(\alpha) = S'(\alpha)
+    \begin{array}{lcll}
+  \least(S,\mathbb{C}) & = & 
+    \forall S'.\,\unifier(\mathbb{C},S') & \to \\ 
+       & & \exists S_1.\, \forall \alpha.\,(S_1 \circ S)(\alpha) =
+           S'(\alpha)
+    \end{array}
 \]
      \end{frame}
      \begin{frame}{Soundness and Completeness}
@@ -458,6 +467,8 @@ that
          \begin{itemize}
               \item Proof automation is crucial to scale Coq
                 formalizations.
+              \item \ltac scripts fill all proof obligations for termination, soundness
+                and completeness.
               \item Main tools used for automating proofs: 
                 \begin{itemize}
                      \item Custom \ltac scripts for proof state
