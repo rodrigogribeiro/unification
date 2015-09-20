@@ -94,38 +94,33 @@
      \end{frame}
      \begin{frame}{Introduction}
           \begin{itemize}
-              \item Type inference is an important component of modern
-                functional languages, like Haskell and ML.
+              \item Type inference is an important mechanism of modern
+                functional languages, like Haskell and ML
                \item Type inference algorithms divided in 
                \begin{itemize}
                     \item Constraint generation
                     \item Constraint solving
                \end{itemize}
                \item Constraint solving for parametric polymorphism:
-                 \textbf{First order unification}.
+                 \textbf{First order unification}
           \end{itemize}
      \end{frame}
      \begin{frame}{Introduction}
           \begin{itemize}
-              \item A sound and complete algorithm for first order
-                unification is due to Robinson.
-              \item Proofs have a constructive nature!
+              \item Soundness: Computed substiution is a unifier.
+              \item Every unifier can be obtained as $S \circ S_c$, for
+                       some $S$, where $S_c$ is the computed substitution.
+              \item Simple algorithms contained in textbooks, e.g:
               \begin{itemize}
-                   \item Can be formalized in type theory based proof
-                     assistants
-                   \item Literature reports formalizations in Agda,
-                     Coq, Isabelle.
+                \item  Types and Programming Languages, Benjamin Pierce, The MIT Press, 2002.
+                \item Foundations for Programming Languages, John Mitchell, The MIT Press, 1996.
               \end{itemize}
           \end{itemize}
      \end{frame}
      \begin{frame}{Motivation}
          \begin{itemize}
               \item Build a sound, complete and ``axiom-free'' formalization of
-                unification, following textbooks presentation.
-                \begin{itemize}
-                    \item Axiom-free formalizations allows code
-                      extraction in Coq proof assistant.
-                \end{itemize}
+                unification, following textbooks presentations.
               \item First step toward a complete formalization of 
                 type inference algorithm for Haskell.
          \end{itemize}
@@ -133,10 +128,10 @@
      \begin{frame}{Coq Proof Assistant}
          \begin{itemize}
              \item Formalization developed using Coq version 8.4.
-             \item Why choose Coq?
+             \item Why Coq?
              \begin{itemize}
-                 \item Coq is a mature tool used in several large
-                   scale formalizations like a C compiler, Java Card
+                 \item Mature tool used in several large
+                   scale formalizations: e.g.  C compiler, Java Card
                    plataform and mathematical theorems.
              \end{itemize}
              \item Code avaliable at:
@@ -147,17 +142,10 @@
      \end{frame}
      \begin{frame}{Coq Proof Assistant}
          \begin{itemize}
-             \item Coq is based on the BHK-correspondence.
-             \begin{itemize}
-                  \item Types models logical formulas.
-                  \item Terms models proofs.
-                  \item Proof checking consists of type checking terms.
-             \end{itemize}
+             \item  Proof checking consists of type checking
              \item Provides \textbf{tactics} to ease proof
                construction.
-             \begin{itemize}
-                  \item Built-in DSL for build tactics: \ltac
-             \end{itemize}
+             \item Has built-in DSL for building tactics: \ltac
          \end{itemize}
      \end{frame}
      \begin{frame}{Coq Proof Assistant}
@@ -170,8 +158,8 @@
           \begin{itemize}
               \item Sample theorem --- term based version
               \lstll
-              \item Coq syntax is heavy. We'll use~\LaTeX~syntax to
-                present the developed formalization.
+              \item We'll use a more
+familiar notation (not Coq) for definitions of types and functions
           \end{itemize}
      \end{frame}
      \begin{frame}{Definitions}
