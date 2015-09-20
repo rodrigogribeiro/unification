@@ -158,34 +158,35 @@
           \begin{itemize}
               \item Sample theorem --- term based version
               \lstll
-              \item We'll use a more
-familiar notation (not Coq) for definitions of types and functions
+              \item We'll use a more familiar notation (not Coq) for definitions of types and functions
           \end{itemize}
      \end{frame}
      \begin{frame}{Definitions}
        \begin{itemize}
-            \item Types are formed by type variables ($\alpha$), type
-              constructors ($c$) and arrows $\to$.
+            \item We consider that terms are types, formed by type variables ($\alpha$), type
+              constructors ($c$) and arrows $\to$
        \[
        \begin{array}{rcl}
            \tau & ::= & \alpha\,\mid\,c\,\mid\,\tau\to\tau
        \end{array}
        \]
 
-            \item Kinding information needed to correctly model Haskell
-              types. 
+            \item Kinding information needed to model Haskell
+              types, but: 
              \begin{itemize}
-                 \item Kinds are orthogonal to unification.
-                 \item Omitted from formalization to benefit clarity.
+                 \item The use of kinds is orthogonal to unification
+                 \item Kinds are omitted for clarity
+                 \item Handling kinds is straightforward
              \end{itemize}
        \end{itemize}
      \end{frame}
      \begin{frame}{Definitions}
           \begin{itemize}
-              \item $FV(\tau)$: free type variables from $\tau$.
+              \item $FV(\tau)$: free type variables from $\tau$
               \item $\tau_1 \eeq \tau_2$: equality
-                constraint. Meta-variable $\mathbb{C}$ denotes a list
-                of (equality) constraints.
+                constraint
+              \item Meta-variable $\mathbb{C}$ denotes a list
+                of (equality) constraints
               \item Size of a type.
                 \[ \begin{array}[t]{llp{.7\textwidth}} 
                      \size(\tau_1 \to \tau_2) & = & $1 + \size(\tau_1) + \size(\tau_2)$ \\
@@ -214,10 +215,10 @@ definition of $\size$.
      \end{frame}
      \begin{frame}{Substitutions}
        \begin{itemize}
-           \item Functions from type variables to types. 
-            \item Metavariable $S$ denote substitutions and $id$
+           \item Finite functions from type variables to types. 
+            \item Metavariable $S$ denotes substitutions and $id$
               denotes the identity substitution.
-            \item Also represented as finite mappings:
+            \item Represented as finite mappings:
               $[\alpha_1\,\mapsto\,\tau_1,...,\alpha_n\,\mapsto\,\tau_n]$
        \end{itemize}
      \end{frame}
@@ -261,21 +262,22 @@ definition of $\size$.
 \textbf{Lemma:} For all substitutions $S$ and $S'$, if $S(\alpha)=S'(\alpha)$ for all
 variables $\alpha$, then $S(\tau) = S'(\tau)$ for all types $\tau$.
 
-\noindent\textbf{Proof:}Induction over $\tau$, using the definition of substitution
+\noindent\textbf{Proof:} Induction over $\tau$, using the definition of substitution
 application.
      \end{frame}
      \begin{frame}{Well-Formedness Conditions}
           \begin{itemize}
               \item Conditions imposed on types, constraints and
-                substitutions to give simple proofs for termination,
+                substitutions to give simple proofs of termination,
                 soundness and completeness.
               \item During the execution of $\unify$ the variable
-                context holds the complement of unifier domain.
+                context (a set of variables) is used to hold the
+                complement of the unifier domain.
           \end{itemize}
      \end{frame}
      \begin{frame}{Well-Formedness Conditions}
           \begin{itemize}
-             \item A type $\tau$ is well-formed in \V, written as
+             \item Type $\tau$ is well-formed in a variable context \V, written as
                $\wf(\V,\tau)$, if all type variables that occur in $\tau$ are
                in \V.
              \item A constraint $\tau_1 \eeq
@@ -316,7 +318,7 @@ application.
 $\wf(\V,S_1)$ and $\wf(\V-\dom(S_1),S_2)$ we have that $(S_2 \circ
 S_1)\,(\tau) = S_2 (S_1 (\tau))$.
 
-\noindent\textbf{Proof:}By induction over the structure of $S_2$.
+\noindent\textbf{Proof:} By induction over the structure of $S_2$.
      \end{frame}
      \begin{frame}{Occurs Check}
           \begin{itemize}
@@ -336,8 +338,8 @@ S_1)\,(\tau) = S_2 (S_1 (\tau))$.
         \begin{itemize}
              \item Occurs check is crucial to prove termination of
                unification.
-             \item Next lemma is important to relate application of a 
-                      substitution and occurs check.
+             \item Next lemma is important to establish a relation between
+application of substitution and the occurs check.
         \end{itemize}
         \textbf{Lemma:} Let $\tau$ be s.t. $\wf(\V,\tau)$ and
         $\neg\Occurs(\alpha,\tau)$. Then $\wf(\V-\{\alpha\},\tau)$.
@@ -348,7 +350,7 @@ S_1)\,(\tau) = S_2 (S_1 (\tau))$.
 \[
 \small{
 \begin{array}{ll}
-(1) & \unify([\: ]) = [\: ]\\
+(1) & \unify([\: ]) = id\\
 (2) & \unify((\alpha \eeq \alpha) :: \mathbb{C}) = \unify(\mathbb{C})\\
 (3) & \unify((\alpha \eeq\tau) :: \mathbb{C}) = 
       \If \Occurs(\alpha,\tau) \Then \fail \Else \\
@@ -424,7 +426,7 @@ that
 \[
     \begin{array}{lcll}
   \least(S,\mathbb{C}) & = & 
-    \forall S'.\,\unifier(\mathbb{C},S') & \to \\ 
+    \forall S'.\,\unifier(\mathbb{C},S') \to &  \\ 
        & & \exists S_1.\, \forall \alpha.\,(S_1 \circ S)(\alpha) =
            S'(\alpha)
     \end{array}
@@ -437,7 +439,7 @@ that
     \least(S,\mathbb{C})\bigr) \lor \text{UnifyFailure($\mathbb{C}$)}
 \]
                \item $UnifyFailure(\mathbb{C})$: type that explain the reason
-                 of failure of unification for \C.
+                 of failure of unification of \C.
          \end{itemize}
      \end{frame}
      \begin{frame}{Soundness and Completeness}
