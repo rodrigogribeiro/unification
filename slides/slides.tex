@@ -130,7 +130,7 @@ Ltac mysimp := (repeat (simpl; s)) ; simpl; auto with arith.
      \begin{frame}{Introduction}
           \begin{itemize}
               \item Soundness: Computed substiution is a unifier.
-              \item Every unifier can be obtained as $S \circ S_c$, for
+              \item Completeness: Every unifier can be obtained as $S \circ S_c$, for
                        some $S$, where $S_c$ is the computed substitution.
               \item Simple algorithms contained in textbooks, e.g:
               \begin{itemize}
@@ -254,9 +254,9 @@ definition of $\size$.
                                    \symbol{91}\alpha\mapsto\tau'\symbol{93}\tau_1\\
                                    \tau_2'  = \symbol{91}\alpha\mapsto\tau'\symbol{93}\tau_2
                                            \end{array} \right.\\
-                 \symbol{91}\alpha\mapsto\tau'\symbol{93}\,\alpha &= &\tau\\
-                 \symbol{91}\alpha\mapsto\tau'\symbol{93}\,\tau'  &=&
-                                                                      \tau' 
+                 \symbol{91}\alpha\mapsto\tau'\symbol{93}\,\alpha &= &\tau'\\
+                 \symbol{91}\alpha\mapsto\tau'\symbol{93}\,\tau  &=&
+                                                                      \tau 
                                                                       
              \end{array}
        \]
@@ -442,15 +442,13 @@ that
      \begin{frame}{Soundness and Completeness}
         \begin{itemize}
             \item Substitution ordering
-              \[S \leq S' \defas \exists S_1. S' = S_1 \circ S \]
+              \[S \leq S' \defas \exists S_1. \forall \alpha.\,S'(\alpha) = S_1 \circ S (\alpha)\]
             \item Least unifier definition
         \end{itemize}
 \[
     \begin{array}{lcll}
   \least(S,\mathbb{C}) & = & 
-    \forall S'.\,\unifier(\mathbb{C},S') \to &  \\ 
-       & & \exists S_1.\, \forall \alpha.\,(S_1 \circ S)(\alpha) =
-           S'(\alpha)
+    \forall S'.\,\unifier(\mathbb{C},S') \to S \le S'
     \end{array}
 \]
      \end{frame}
