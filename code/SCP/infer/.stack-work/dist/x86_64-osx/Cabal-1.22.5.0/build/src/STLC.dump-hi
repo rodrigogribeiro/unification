@@ -1,0 +1,769 @@
+
+==================== FINAL INTERFACE ====================
+2016-07-22 20:24:36.717167 UTC
+
+interface infer_LATtaxaRTSJFnVvXBzV43n:STLC 7103
+  interface hash: d578c8b0e30c25361836ebd155484bc5
+  ABI hash: 75ea0b5ad595366d47c95b22e38f4685
+  export-list hash: 17b706549fa5eea8df04b3a557d09f9a
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 4c0a7b65a6dddbc4161c2e2bfabe3dc3
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  STLC.add_constr
+  STLC.apply_subst
+  STLC.apply_subst_constraint
+  STLC.fresh
+  STLC.gen_constr
+  STLC.gen_constr'
+  STLC.get
+  STLC.look
+  STLC.modify
+  STLC.occurs_dec
+  STLC.put
+  STLC.sub
+  STLC.type_infer
+  STLC.unify
+  STLC.Constr
+  STLC.Constraints
+  STLC.Id
+  STLC.Nat{STLC.O STLC.S}
+  STLC.Substitution
+  STLC.TcM{STLC.TcM STLC.runTcM}
+  STLC.TcState{STLC.TcState STLC.constrs STLC.next}
+  STLC.Term{STLC.App_t STLC.Const_t STLC.Lam_t STLC.Var_t}
+  STLC.Ty{STLC.Arr STLC.Con STLC.Var}
+  STLC.Tyctx
+module dependencies:
+package dependencies: base-4.8.2.0* ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+family instance modules: base-4.8.2.0:Control.Applicative
+                         base-4.8.2.0:Data.Either base-4.8.2.0:Data.Monoid
+                         base-4.8.2.0:Data.Type.Equality base-4.8.2.0:GHC.Generics
+import  -/  base-4.8.2.0:Data.Foldable 2ce969969ad5231eb40bd713f94f05ad
+import  -/  base-4.8.2.0:Data.Maybe 1cb58de2b04ee3c0c0a7dc9201184aff
+import  -/  base-4.8.2.0:Data.Tuple 012ad951a59a9d85fe1de36a2f012986
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:GHC.Show 0e1d8380a8fb0cfb07ebeda3b70cbf38
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+cc454441536aa682c4cbed0939a9cdbc
+  $fApplicativeTcM :: GHC.Base.Applicative STLC.TcM
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.TcM
+                  STLC.$fFunctorTcM
+                  STLC.$fApplicativeTcM_$cpure
+                  STLC.$fApplicativeTcM_$c<*>
+                  STLC.$fApplicativeTcM_$c*>
+                  STLC.$fApplicativeTcM_$s$dm<* -}
+eaaa074cc20233237a0788f7bcc7cd2e
+  $fApplicativeTcM1 ::
+    a -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe a)
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,U>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a4 x :: a4 s :: STLC.TcState -> (s, GHC.Base.Just @ a4 x)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fApplicativeTcM_$c*> :: STLC.TcM a -> STLC.TcM b -> STLC.TcM b
+  {- Arity: 2, Strictness: <B,A><B,A>b,
+     Unfolding: InlineRule (2, True, True)
+                (\ @ a4 @ b eta :: STLC.TcM a4 eta1 :: STLC.TcM b ->
+                 GHC.Err.undefined @ (STLC.TcM b)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fApplicativeTcM_$c<*> ::
+    STLC.TcM (a -> b) -> STLC.TcM a -> STLC.TcM b
+  {- Arity: 2, Strictness: <B,A><B,A>b,
+     Unfolding: InlineRule (2, True, True)
+                (\ @ a4 @ b ds :: STLC.TcM (a4 -> b) m :: STLC.TcM a4 ->
+                 GHC.Err.undefined @ (STLC.TcM b)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fApplicativeTcM_$cpure :: a -> STLC.TcM a
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,U>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.$fApplicativeTcM1
+                  `cast`
+                (forall a4. <a4>_R ->_R Sym (STLC.NTCo:TcM[0] <a4>_R)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fApplicativeTcM_$s$dm<* :: STLC.TcM a -> STLC.TcM b -> STLC.TcM a
+  {- Arity: 2, Strictness: <B,A><B,A>b,
+     Unfolding: InlineRule (-1, True, False)
+                (\ @ a4 @ b eta :: STLC.TcM a4 eta1 :: STLC.TcM b ->
+                 STLC.$fApplicativeTcM_$sliftA2
+                   @ a4
+                   @ b
+                   @ a4
+                   (GHC.Base.const @ a4 @ b)
+                   eta
+                   eta1) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fApplicativeTcM_$sliftA2 ::
+    (a -> b -> c) -> STLC.TcM a -> STLC.TcM b -> STLC.TcM c
+  {- Arity: 3, Strictness: <B,A><B,A><B,A>b,
+     Unfolding: InlineRule (3, True, True)
+                (\ @ a4
+                   @ b
+                   @ c
+                   eta :: a4 -> b -> c
+                   eta1 :: STLC.TcM a4
+                   eta2 :: STLC.TcM b ->
+                 GHC.Err.undefined @ (STLC.TcM c)) -}
+cb85c530054cfbaee41d552ff853af48
+  $fEqNat :: GHC.Classes.Eq STLC.Nat
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:. @ STLC.Nat STLC.$fEqNat_$c== STLC.$fEqNat_$c/= -}
+cb85c530054cfbaee41d552ff853af48
+  $fEqNat_$c/= :: STLC.Nat -> STLC.Nat -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ a4 :: STLC.Nat b :: STLC.Nat ->
+                 case STLC.$fEqNat_$c== a4 b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+cb85c530054cfbaee41d552ff853af48
+  $fEqNat_$c== :: STLC.Nat -> STLC.Nat -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+58fb88165c09e1504b6a14d3e0874553
+  $fEqTerm :: GHC.Classes.Eq STLC.Term
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Term STLC.$fEqTerm_$c== STLC.$fEqTerm_$c/= -}
+58fb88165c09e1504b6a14d3e0874553
+  $fEqTerm_$c/= :: STLC.Term -> STLC.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ a4 :: STLC.Term b :: STLC.Term ->
+                 case STLC.$fEqTerm_$c== a4 b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fEqTerm_$c== :: STLC.Term -> STLC.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+efecdde583930486dbf987a6592c9703
+  $fEqTy :: GHC.Classes.Eq STLC.Ty
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:. @ STLC.Ty STLC.$fEqTy_$c== STLC.$fEqTy_$c/= -}
+efecdde583930486dbf987a6592c9703
+  $fEqTy_$c/= :: STLC.Ty -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ a4 :: STLC.Ty b :: STLC.Ty ->
+                 case STLC.$fEqTy_$c== a4 b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+efecdde583930486dbf987a6592c9703
+  $fEqTy_$c== :: STLC.Ty -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fFunctorTcM :: GHC.Base.Functor STLC.TcM
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.TcM STLC.$fFunctorTcM_$cfmap STLC.$fFunctorTcM_$c<$ -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fFunctorTcM1 ::
+    a -> STLC.TcM b -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe a)
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><C(S),C(U(U,U))><L,A>m,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a4 @ b eta :: a4 eta1 :: STLC.TcM b eta2 :: STLC.TcState ->
+                 letrec {
+                   s :: STLC.TcState = case ds of wild { (,) s1 t -> s1 }
+                   ds :: (STLC.TcState, GHC.Base.Maybe b)
+                   = eta1 `cast` (STLC.NTCo:TcM[0] <b>_R) s
+                 } in
+                 case ds of wild { (,) s1 t ->
+                 case t of wild1 {
+                   GHC.Base.Nothing -> (s, GHC.Base.Nothing @ a4)
+                   GHC.Base.Just x -> (s, GHC.Base.Just @ a4 eta) } }) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fFunctorTcM2 ::
+    (a -> b)
+    -> STLC.TcM a -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe b)
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U)><C(S),C(U(U,U))><L,A>m, Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a4 @ b w :: a4 -> b w1 :: STLC.TcM a4 w2 :: STLC.TcState ->
+                 letrec {
+                   s :: STLC.TcState = case ds of wild { (,) s1 t -> s1 }
+                   ds :: (STLC.TcState, GHC.Base.Maybe a4)
+                   = w1 `cast` (STLC.NTCo:TcM[0] <a4>_R) s
+                 } in
+                 case ds of wild { (,) s1 t ->
+                 case t of wild1 {
+                   GHC.Base.Nothing -> (s, GHC.Base.Nothing @ b)
+                   GHC.Base.Just x -> (s, GHC.Base.Just @ b (w x)) } }) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fFunctorTcM_$c<$ :: a -> STLC.TcM b -> STLC.TcM a
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><C(S),C(U(U,U))><L,A>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.$fFunctorTcM1
+                  `cast`
+                (forall a4 b.
+                 <a4>_R ->_R <STLC.TcM b>_R ->_R Sym (STLC.NTCo:TcM[0] <a4>_R)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fFunctorTcM_$cfmap :: (a -> b) -> STLC.TcM a -> STLC.TcM b
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*C1(U)><C(S),C(U(U,U))><L,A>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.$fFunctorTcM2
+                  `cast`
+                (forall a4 b.
+                 <a4 -> b>_R
+                 ->_R <STLC.TcM a4>_R
+                 ->_R Sym (STLC.NTCo:TcM[0] <b>_R)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fMonadTcM :: GHC.Base.Monad STLC.TcM
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.TcM
+                  STLC.$fApplicativeTcM
+                  STLC.$fMonadTcM_$c>>=
+                  STLC.$fMonadTcM_$c>>
+                  STLC.$fApplicativeTcM_$cpure
+                  STLC.$fMonadTcM_$cfail -}
+1cc9ceb6e2aa1e71acda020159e0aee2
+  $fMonadTcM1 ::
+    GHC.Base.String -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe a)
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,A><L,U>m,
+     Unfolding: InlineRule (2, True, True)
+                (\ @ a4 ds :: GHC.Base.String s :: STLC.TcState ->
+                 (s, GHC.Base.Nothing @ a4)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fMonadTcM2 ::
+    STLC.TcM a
+    -> (a -> STLC.TcM b)
+    -> STLC.TcState
+    -> (STLC.TcState, GHC.Base.Maybe b)
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <C(S(LS)),1*C1(U(U,1*U))><L,1*C1(C1(U(U,U)))><L,U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a4
+                   @ b
+                   ds :: STLC.TcM a4
+                   f :: a4 -> STLC.TcM b
+                   s :: STLC.TcState ->
+                 case ds `cast` (STLC.NTCo:TcM[0] <a4>_R) s of wild { (,) s' r ->
+                 case r of wild1 {
+                   GHC.Base.Nothing -> (s', GHC.Base.Nothing @ b)
+                   GHC.Base.Just t -> (f t) `cast` (STLC.NTCo:TcM[0] <b>_R) s' } }) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fMonadTcM_$c>> :: STLC.TcM a -> STLC.TcM b -> STLC.TcM b
+  {- Arity: 2, Strictness: <L,U><L,U>, Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ @ a4
+                   @ b
+                   m1 :: STLC.TcM a4
+                   k :: STLC.TcM b
+                   eta :: STLC.TcState ->
+                 (STLC.$fMonadTcM_$c>>= @ a4 @ b m1 (\ ds :: a4 -> k))
+                   `cast`
+                 (STLC.NTCo:TcM[0] <b>_R)
+                   eta)
+                  `cast`
+                (forall a4 b.
+                 <STLC.TcM a4>_R
+                 ->_R <STLC.TcM b>_R
+                 ->_R Sym (STLC.NTCo:TcM[0] <b>_R)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fMonadTcM_$c>>= :: STLC.TcM a -> (a -> STLC.TcM b) -> STLC.TcM b
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <C(S(LS)),1*C1(U(U,1*U))><L,1*C1(C1(U(U,U)))><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                STLC.$fMonadTcM2
+                  `cast`
+                (forall a4 b.
+                 <STLC.TcM a4>_R
+                 ->_R <a4 -> STLC.TcM b>_R
+                 ->_R Sym (STLC.NTCo:TcM[0] <b>_R)) -}
+cc454441536aa682c4cbed0939a9cdbc
+  $fMonadTcM_$cfail :: GHC.Base.String -> STLC.TcM a
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,A><L,U>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.$fMonadTcM1
+                  `cast`
+                (forall a4.
+                 <GHC.Base.String>_R ->_R Sym (STLC.NTCo:TcM[0] <a4>_R)) -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat :: GHC.Classes.Ord STLC.Nat
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Nat
+                  STLC.$fEqNat
+                  STLC.$fOrdNat_$ccompare
+                  STLC.$fOrdNat_$c<
+                  STLC.$fOrdNat_$c<=
+                  STLC.$fOrdNat_$c>
+                  STLC.$fOrdNat_$c>=
+                  STLC.$fOrdNat_$cmax
+                  STLC.$fOrdNat_$cmin -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$c< :: STLC.Nat -> STLC.Nat -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$c<= :: STLC.Nat -> STLC.Nat -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$c> :: STLC.Nat -> STLC.Nat -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$c>= :: STLC.Nat -> STLC.Nat -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$ccompare :: STLC.Nat -> STLC.Nat -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$cmax :: STLC.Nat -> STLC.Nat -> STLC.Nat
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Nat y :: STLC.Nat ->
+                 case STLC.$fOrdNat_$c<= x y of wild {
+                   GHC.Types.False -> x GHC.Types.True -> y }) -}
+cb85c530054cfbaee41d552ff853af48
+  $fOrdNat_$cmin :: STLC.Nat -> STLC.Nat -> STLC.Nat
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Nat y :: STLC.Nat ->
+                 case STLC.$fOrdNat_$c<= x y of wild {
+                   GHC.Types.False -> y GHC.Types.True -> x }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm :: GHC.Classes.Ord STLC.Term
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Term
+                  STLC.$fEqTerm
+                  STLC.$fOrdTerm_$ccompare
+                  STLC.$fOrdTerm_$c<
+                  STLC.$fOrdTerm_$c<=
+                  STLC.$fOrdTerm_$c>
+                  STLC.$fOrdTerm_$c>=
+                  STLC.$fOrdTerm_$cmax
+                  STLC.$fOrdTerm_$cmin -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$c< :: STLC.Term -> STLC.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Term y :: STLC.Term ->
+                 case STLC.$fOrdTerm_$ccompare x y of wild {
+                   DEFAULT -> GHC.Types.False GHC.Types.LT -> GHC.Types.True }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$c<= :: STLC.Term -> STLC.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Term y :: STLC.Term ->
+                 case STLC.$fOrdTerm_$ccompare x y of wild {
+                   DEFAULT -> GHC.Types.True GHC.Types.GT -> GHC.Types.False }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$c> :: STLC.Term -> STLC.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Term y :: STLC.Term ->
+                 case STLC.$fOrdTerm_$ccompare x y of wild {
+                   DEFAULT -> GHC.Types.False GHC.Types.GT -> GHC.Types.True }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$c>= :: STLC.Term -> STLC.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Term y :: STLC.Term ->
+                 case STLC.$fOrdTerm_$ccompare x y of wild {
+                   DEFAULT -> GHC.Types.True GHC.Types.LT -> GHC.Types.False }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$ccompare :: STLC.Term -> STLC.Term -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$cmax :: STLC.Term -> STLC.Term -> STLC.Term
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Term y :: STLC.Term ->
+                 case STLC.$fOrdTerm_$ccompare x y of wild {
+                   DEFAULT -> y GHC.Types.GT -> x }) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fOrdTerm_$cmin :: STLC.Term -> STLC.Term -> STLC.Term
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Term y :: STLC.Term ->
+                 case STLC.$fOrdTerm_$ccompare x y of wild {
+                   DEFAULT -> x GHC.Types.GT -> y }) -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy :: GHC.Classes.Ord STLC.Ty
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Ty
+                  STLC.$fEqTy
+                  STLC.$fOrdTy_$ccompare
+                  STLC.$fOrdTy_$c<
+                  STLC.$fOrdTy_$c<=
+                  STLC.$fOrdTy_$c>
+                  STLC.$fOrdTy_$c>=
+                  STLC.$fOrdTy_$cmax
+                  STLC.$fOrdTy_$cmin -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$c< :: STLC.Ty -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$c<= :: STLC.Ty -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$c> :: STLC.Ty -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$c>= :: STLC.Ty -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$ccompare :: STLC.Ty -> STLC.Ty -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$cmax :: STLC.Ty -> STLC.Ty -> STLC.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Ty y :: STLC.Ty ->
+                 case STLC.$fOrdTy_$c<= x y of wild {
+                   GHC.Types.False -> x GHC.Types.True -> y }) -}
+efecdde583930486dbf987a6592c9703
+  $fOrdTy_$cmin :: STLC.Ty -> STLC.Ty -> STLC.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ x :: STLC.Ty y :: STLC.Ty ->
+                 case STLC.$fOrdTy_$c<= x y of wild {
+                   GHC.Types.False -> y GHC.Types.True -> x }) -}
+cb85c530054cfbaee41d552ff853af48
+  $fShowNat :: GHC.Show.Show STLC.Nat
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Nat
+                  STLC.$fShowNat_$cshowsPrec
+                  STLC.$fShowNat_$cshow
+                  STLC.$fShowNat_$cshowList -}
+cb85c530054cfbaee41d552ff853af48
+  $fShowNat1 :: STLC.Nat -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (STLC.$fShowNat_$cshowsPrec STLC.$fShowNat2) -}
+7d79138e229ecaf3ef9f368bb977ebe4
+  $fShowNat2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0) -}
+cb85c530054cfbaee41d552ff853af48
+  $fShowNat_$cshow :: STLC.Nat -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: STLC.Nat ->
+                 STLC.$fShowNat_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+cb85c530054cfbaee41d552ff853af48
+  $fShowNat_$cshowList :: [STLC.Nat] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ STLC.Nat STLC.$fShowNat1) -}
+cb85c530054cfbaee41d552ff853af48
+  $fShowNat_$cshowsPrec ::
+    GHC.Types.Int -> STLC.Nat -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U> -}
+58fb88165c09e1504b6a14d3e0874553
+  $fShowTerm :: GHC.Show.Show STLC.Term
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Term
+                  STLC.$fShowTerm_$cshowsPrec
+                  STLC.$fShowTerm_$cshow
+                  STLC.$fShowTerm_$cshowList -}
+58fb88165c09e1504b6a14d3e0874553
+  $fShowTerm1 :: STLC.Term -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (STLC.$fShowTerm_$cshowsPrec STLC.$fShowNat2) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fShowTerm_$cshow :: STLC.Term -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: STLC.Term ->
+                 STLC.$fShowTerm_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fShowTerm_$cshowList :: [STLC.Term] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ STLC.Term STLC.$fShowTerm1) -}
+58fb88165c09e1504b6a14d3e0874553
+  $fShowTerm_$cshowsPrec ::
+    GHC.Types.Int -> STLC.Term -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U> -}
+efecdde583930486dbf987a6592c9703
+  $fShowTy :: GHC.Show.Show STLC.Ty
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Ty
+                  STLC.$fShowTy_$cshowsPrec
+                  STLC.$fShowTy_$cshow
+                  STLC.$fShowTy_$cshowList -}
+efecdde583930486dbf987a6592c9703
+  $fShowTy1 :: STLC.Ty -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (STLC.$fShowTy_$cshowsPrec STLC.$fShowNat2) -}
+efecdde583930486dbf987a6592c9703
+  $fShowTy_$cshow :: STLC.Ty -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: STLC.Ty ->
+                 STLC.$fShowTy_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+efecdde583930486dbf987a6592c9703
+  $fShowTy_$cshowList :: [STLC.Ty] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ STLC.Ty STLC.$fShowTy1) -}
+efecdde583930486dbf987a6592c9703
+  $fShowTy_$cshowsPrec :: GHC.Types.Int -> STLC.Ty -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U> -}
+d3bc88541a19c558c7b37aecc59c675c
+  type Constr = (STLC.Ty, STLC.Ty)
+00a857d51267c3f4b650e82fae589095
+  type Constraints = [STLC.Constr]
+4450b5dfa1d8dd2a48661064a030ca44
+  type Id = STLC.Nat
+cb85c530054cfbaee41d552ff853af48
+  data Nat = O | S STLC.Nat
+    Promotable
+654f56324ac4fd0d2eb58734d6b61d66
+  type Substitution = [(STLC.Id, STLC.Ty)]
+cc454441536aa682c4cbed0939a9cdbc
+  newtype TcM a
+    = TcM {runTcM :: STLC.TcState -> (STLC.TcState, GHC.Base.Maybe a)}
+f36010fb48eebbbcd750320171f52fad
+  data TcState
+    = TcState {next :: STLC.Id, constrs :: STLC.Constraints}
+58fb88165c09e1504b6a14d3e0874553
+  data Term
+    = Var_t STLC.Id
+    | App_t STLC.Term STLC.Term
+    | Lam_t STLC.Id STLC.Term
+    | Const_t
+efecdde583930486dbf987a6592c9703
+  data Ty = Var STLC.Id | Arr STLC.Ty STLC.Ty | Con
+1c4da998282084ae0ee8c41777282426
+  type Tyctx = [(STLC.Id, STLC.Ty)]
+e27a7af0a0b644adab82e3cd2f19174c
+  add_constr :: STLC.Ty -> STLC.Ty -> STLC.TcM ()
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><L,U><L,1*U(U,U)>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.add_constr1
+                  `cast`
+                (<STLC.Ty>_R
+                 ->_R <STLC.Ty>_R
+                 ->_R Sym (STLC.NTCo:TcM[0] <()>_R)) -}
+23a19cd6f2bdae1c44886bbf86b64375
+  add_constr1 ::
+    STLC.Ty
+    -> STLC.Ty -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe ())
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><L,U><L,1*U(U,U)>m,
+     Unfolding: InlineRule (3, True, False)
+                (\ t :: STLC.Ty t' :: STLC.Ty eta :: STLC.TcState ->
+                 (case eta of wild { STLC.TcState ds ds1 ->
+                  STLC.TcState ds (GHC.Types.: @ STLC.Constr (t, t') ds1) },
+                  STLC.add_constr2)) -}
+451fe3f270e45cba25c2e0609557cd3a
+  add_constr2 :: GHC.Base.Maybe ()
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Base.Just @ () GHC.Tuple.()) -}
+1210ebef67642cb50ed297ef911af314
+  apply_subst :: STLC.Substitution -> STLC.Ty -> STLC.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,U>,
+     Unfolding: (\ s :: STLC.Substitution t :: STLC.Ty ->
+                 letrec {
+                   go :: [(STLC.Id, STLC.Ty)] -> STLC.Ty
+                     {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ ds :: [(STLC.Id, STLC.Ty)] ->
+                     case ds of wild {
+                       [] -> t
+                       : y ys -> case y of wild1 { (,) i t' -> STLC.sub t' i (go ys) } }
+                 } in
+                 go s) -}
+3900d326dde7d2aaa5aa65ca8f11771c
+  apply_subst_constraint ::
+    STLC.Substitution -> STLC.Constraints -> STLC.Constraints
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U>,
+     Unfolding: (\ s :: STLC.Substitution cs :: STLC.Constraints ->
+                 GHC.Base.map
+                   @ (STLC.Ty, STLC.Ty)
+                   @ (STLC.Ty, STLC.Ty)
+                   (\ ds :: (STLC.Ty, STLC.Ty) ->
+                    case ds of wild { (,) t t' ->
+                    (STLC.apply_subst s t, STLC.apply_subst s t') })
+                   cs) -}
+833a231afc188f9c8657a5a50c5f009c
+  constrs :: STLC.TcState -> STLC.Constraints
+  RecSel STLC.TcState
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LS),1*U(A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: STLC.TcState ->
+                 case ds of wild { STLC.TcState ds1 ds2 -> ds2 }) -}
+b79c4714d284f55f8c3970554d00bde6
+  fresh :: STLC.TcM STLC.Ty
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(U,U)>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.fresh1 `cast` (Sym (STLC.NTCo:TcM[0] <STLC.Ty>_R)) -}
+3b3712314dc62020a7ddc505959f099c
+  fresh1 :: STLC.TcState -> (STLC.TcState, GHC.Base.Maybe STLC.Ty)
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U(U,U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ s :: STLC.TcState ->
+                 (case s of wild { STLC.TcState ds ds1 ->
+                  STLC.TcState (STLC.S ds) ds1 },
+                  GHC.Base.Just
+                    @ STLC.Ty
+                    (STLC.Var (case s of wild { STLC.TcState ds ds1 -> ds })))) -}
+a3480e0b335eeba27dcfb364aff9b443
+  gen_constr ::
+    STLC.Tyctx
+    -> STLC.Term -> (STLC.Constraints, GHC.Base.Maybe STLC.Ty)
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,1*U>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: STLC.Tyctx w1 :: STLC.Term ->
+                 let {
+                   r :: (STLC.TcState, GHC.Base.Maybe STLC.Ty)
+                   = (STLC.gen_constr' w w1) `cast` (STLC.NTCo:TcM[0] <STLC.Ty>_R)
+                       STLC.gen_constr1
+                 } in
+                 (case r of wild { (,) x ds1 ->
+                  case x of wild1 { STLC.TcState ds ds2 -> ds2 } },
+                  Data.Tuple.snd @ STLC.TcState @ (GHC.Base.Maybe STLC.Ty) r)) -}
+b0bd3100d4803f5d624e300a1b576265
+  gen_constr' :: STLC.Tyctx -> STLC.Term -> STLC.TcM STLC.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+665bee46aeda733aca8f74be3530379c
+  gen_constr1 :: STLC.TcState
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (STLC.TcState STLC.O (GHC.Types.[] @ STLC.Constr)) -}
+793bdba1ec8954a91c4abb2a84eed248
+  get :: STLC.TcM STLC.TcState
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.get1 `cast` (Sym (STLC.NTCo:TcM[0] <STLC.TcState>_R)) -}
+bb9adca8eac40db9339ae686f166fa9b
+  get1 :: STLC.TcState -> (STLC.TcState, GHC.Base.Maybe STLC.TcState)
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ s :: STLC.TcState -> (s, GHC.Base.Just @ STLC.TcState s)) -}
+32a0d5f599eebd83067b413379836d57
+  look :: STLC.Id -> STLC.Tyctx -> STLC.TcM STLC.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+836aa149ae40395588cdd17c2f312ec6
+  modify :: (STLC.TcState -> STLC.TcState) -> STLC.TcM ()
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*C1(U)><L,U>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.modify1
+                  `cast`
+                (<STLC.TcState -> STLC.TcState>_R
+                 ->_R Sym (STLC.NTCo:TcM[0] <()>_R)) -}
+07399b0a26e4d5403350ace6e081d653
+  modify1 ::
+    (STLC.TcState -> STLC.TcState)
+    -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe ())
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*C1(U)><L,U>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ f :: STLC.TcState -> STLC.TcState eta :: STLC.TcState ->
+                 (f eta, STLC.add_constr2)) -}
+fd148df47edf076492d37207422f24fa
+  next :: STLC.TcState -> STLC.Id
+  RecSel STLC.TcState
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SL),1*U(1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: STLC.TcState ->
+                 case ds of wild { STLC.TcState ds1 ds2 -> ds1 }) -}
+216a7ae74f1f385d851bd4e3db42b1fb
+  occurs_dec :: STLC.Id -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+b5723007b719bf9a5b2dbf309da6245b
+  put :: STLC.TcState -> STLC.TcM ()
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,A>m,
+     Unfolding: InlineRule (0, True, True)
+                STLC.put1
+                  `cast`
+                (<STLC.TcState>_R ->_R Sym (STLC.NTCo:TcM[0] <()>_R)) -}
+11b49799e611af30e7e317aefc1f241e
+  put1 ::
+    STLC.TcState -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe ())
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,A>m,
+     Unfolding: InlineRule (2, True, True)
+                (\ s :: STLC.TcState ds :: STLC.TcState ->
+                 (s, STLC.add_constr2)) -}
+efaefc95e61da87cc9ac924a6b8466b1
+  runTcM ::
+    STLC.TcM a -> STLC.TcState -> (STLC.TcState, GHC.Base.Maybe a)
+  RecSel STLC.TcM
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                STLC.runTcM1
+                  `cast`
+                (forall a4. <STLC.TcM a4>_R ->_R STLC.NTCo:TcM[0] <a4>_R) -}
+fe4b87db484f0a6856aca9d9f66287d1
+  runTcM1 :: STLC.TcM a -> STLC.TcM a
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ a4 ds :: STLC.TcM a4 -> ds) -}
+14faf5ca15959c4606580a1496f4538a
+  sub :: STLC.Ty -> STLC.Id -> STLC.Ty -> STLC.Ty
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><L,U><S,1*U> -}
+bb605703c460613de85ece7d9398b487
+  type_infer :: STLC.Term -> GHC.Base.Maybe STLC.Ty
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ e :: STLC.Term ->
+                 case (STLC.gen_constr' (GHC.Types.[] @ (STLC.Id, STLC.Ty)) e)
+                        `cast`
+                      (STLC.NTCo:TcM[0] <STLC.Ty>_R)
+                        STLC.gen_constr1 of ww { (,) ww1 ww2 ->
+                 case ww1 of ww3 { STLC.TcState ww4 ww5 ->
+                 case STLC.unify ww5 of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ STLC.Ty
+                   GHC.Base.Just s
+                   -> case ww2 of wild1 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ STLC.Ty
+                        GHC.Base.Just t
+                        -> GHC.Base.Just @ STLC.Ty (STLC.apply_subst s t) } } } }) -}
+c072d4007c197800d75fa40a8c26f7fd
+  unify :: STLC.Constraints -> GHC.Base.Maybe STLC.Substitution
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+instance GHC.Base.Applicative [STLC.TcM] = STLC.$fApplicativeTcM
+instance GHC.Classes.Eq [STLC.Nat] = STLC.$fEqNat
+instance GHC.Classes.Eq [STLC.Term] = STLC.$fEqTerm
+instance GHC.Classes.Eq [STLC.Ty] = STLC.$fEqTy
+instance GHC.Base.Functor [STLC.TcM] = STLC.$fFunctorTcM
+instance GHC.Base.Monad [STLC.TcM] = STLC.$fMonadTcM
+instance GHC.Classes.Ord [STLC.Nat] = STLC.$fOrdNat
+instance GHC.Classes.Ord [STLC.Term] = STLC.$fOrdTerm
+instance GHC.Classes.Ord [STLC.Ty] = STLC.$fOrdTy
+instance GHC.Show.Show [STLC.Nat] = STLC.$fShowNat
+instance GHC.Show.Show [STLC.Term] = STLC.$fShowTerm
+instance GHC.Show.Show [STLC.Ty] = STLC.$fShowTy
+"SPEC/STLC $dm<* @ TcM" [ALWAYS] forall $dApplicative :: GHC.Base.Applicative
+                                                           STLC.TcM
+  GHC.Base.$dm<* @ STLC.TcM $dApplicative
+  = STLC.$fApplicativeTcM_$s$dm<*
+"SPEC/STLC liftA2 _ _ _ @ TcM" [ALWAYS] forall @ a4
+                                               @ b
+                                               @ c
+                                               $dApplicative :: GHC.Base.Applicative STLC.TcM
+  GHC.Base.liftA2 @ a4 @ b @ c @ STLC.TcM $dApplicative
+  = STLC.$fApplicativeTcM_$sliftA2 @ a4 @ b @ c
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: unify.aux
+The style file: splncs.bst
+Database file #1: unify.bib
+Warning--empty publisher in Haskell98
+You've used 30 entries,
+            2087 wiz_defined-function locations,
+            719 strings with 9110 characters,
+and the built_in function-call counts, 8270 in all, are:
+= -- 846
+> -- 243
+< -- 22
++ -- 94
+- -- 64
+* -- 539
+:= -- 1092
+add.period$ -- 41
+call.type$ -- 30
+change.case$ -- 22
+chr.to.int$ -- 0
+cite$ -- 31
+duplicate$ -- 459
+empty$ -- 843
+format.name$ -- 64
+if$ -- 2061
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 34
+newline$ -- 152
+num.names$ -- 42
+pop$ -- 116
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 300
+stack$ -- 0
+substring$ -- 441
+swap$ -- 231
+text.length$ -- 22
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 75
+width$ -- 32
+write$ -- 342
+(There was 1 warning)

@@ -1,0 +1,280 @@
+
+==================== FINAL INTERFACE ====================
+2016-07-24 21:45:53.623789 UTC
+
+interface main@main:Main [orphan module] 7103
+  interface hash: d2ca43ddb16c1c1e30ea352c8b83c5b4
+  ABI hash: 02c63ddafcf3bc7e76994f6030ddff69
+  export-list hash: 59a94da44dddc2fa839dd473b6ffd34c
+  orphan hash: 7000360809264c9357e465d4133de9fb
+  flag hash: cdeb15bde1927a540ad7eef01ded6e85
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.main
+module dependencies:
+package dependencies: QuickCheck-2.8.2@Quick_6TxL5Cx3o2p0HsyT59KWiD
+                      array-0.5.1.0@array_67iodizgJQIIxYVTp4emlA base-4.8.2.0*
+                      containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU
+                      deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59 ghc-prim-0.4.0.0
+                      infer-0.1.0.0@infer_LATtaxaRTSJFnVvXBzV43n integer-gmp-1.0.0.0
+                      pretty-1.1.2.0@prett_JItwetRppk1H5Uq3xbjDGC
+                      primitive-0.6.1.0@primi_EphY2c7CCxSCBKjAN0YTR3
+                      random-1.1@rando_9Kgekc9yEaLHLNUuw6paWL template-haskell-2.10.0.0
+                      tf-random-0.5@tfran_1eLmkn3WUnC8NZpPuDLGKF
+                      time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn
+                      transformers-0.4.2.0@trans_GZTjP9K5WFq01xC9BAGQpF
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+         time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn:Data.Time.Calendar.Gregorian
+         time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn:Data.Time.Format.Parse
+         time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn:Data.Time.LocalTime.LocalTime
+         transformers-0.4.2.0@trans_GZTjP9K5WFq01xC9BAGQpF:Control.Monad.Trans.Error
+family instance modules: base-4.8.2.0:Control.Applicative
+                         base-4.8.2.0:Data.Either base-4.8.2.0:Data.Functor.Identity
+                         base-4.8.2.0:Data.Monoid base-4.8.2.0:Data.Type.Equality
+                         base-4.8.2.0:Data.Void base-4.8.2.0:GHC.Exts
+                         base-4.8.2.0:GHC.Generics
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.IntMap.Base
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.IntSet.Base
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Map.Base
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Sequence
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Set.Base
+                         pretty-1.1.2.0@prett_JItwetRppk1H5Uq3xbjDGC:Text.PrettyPrint.HughesPJ
+                         primitive-0.6.1.0@primi_EphY2c7CCxSCBKjAN0YTR3:Control.Monad.Primitive
+                         template-haskell-2.10.0.0:Language.Haskell.TH.Syntax
+import  -/  QuickCheck-2.8.2@Quick_6TxL5Cx3o2p0HsyT59KWiD:Test.QuickCheck 7e615a40a74c9052467718d8c88a3cda
+import  -/  QuickCheck-2.8.2@Quick_6TxL5Cx3o2p0HsyT59KWiD:Test.QuickCheck.Arbitrary 32ee5c050808e027e9d8bd78857fe6b5
+import  -/  QuickCheck-2.8.2@Quick_6TxL5Cx3o2p0HsyT59KWiD:Test.QuickCheck.Gen 06f68a423d098fdb51859fed401c5be6
+import  -/  QuickCheck-2.8.2@Quick_6TxL5Cx3o2p0HsyT59KWiD:Test.QuickCheck.Property 2d09f2ef07ce3d8d7d5d68d4a6d952e3
+import  -/  QuickCheck-2.8.2@Quick_6TxL5Cx3o2p0HsyT59KWiD:Test.QuickCheck.Test 561b1ea8b5304bd28dcab7574bd1bfd6
+import  -/  base-4.8.2.0:Control.Monad 480c5067477275068c9b98be08410df9
+import  -/  base-4.8.2.0:Data.Foldable 2ce969969ad5231eb40bd713f94f05ad
+import  -/  base-4.8.2.0:Data.Maybe 1cb58de2b04ee3c0c0a7dc9201184aff
+import  -/  base-4.8.2.0:Data.Tuple 012ad951a59a9d85fe1de36a2f012986
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+import  -/  infer-0.1.0.0@infer_LATtaxaRTSJFnVvXBzV43n:STLC 75ea0b5ad595366d47c95b22e38f4685
+import  -/  infer-0.1.0.0@infer_LATtaxaRTSJFnVvXBzV43n:TypeInfer 4559068833fa6567076dba2a5222ba78
+d047c4b177461430c72afca9cc1b43c2
+  $fArbitraryNat :: Test.QuickCheck.Arbitrary.Arbitrary STLC.Nat
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Nat
+                  Main.$fArbitraryNat_$carbitrary
+                  Main.$fArbitraryNat_$s$dmshrink -}
+9fd138b9e580c143b0ddf8249cdc150d
+  $fArbitraryNat_$carbitrary :: Test.QuickCheck.Gen.Gen STLC.Nat
+c0fae9ff3f522b4441a363d90fc39703
+  $fArbitraryNat_$s$dmshrink :: STLC.Nat -> [STLC.Nat]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (-1, True, True)
+                (\ ds1 :: STLC.Nat -> GHC.Types.[] @ STLC.Nat) -}
+9dcb68c6dd25a86e609d901cb8b966e4
+  $fArbitraryTy :: Test.QuickCheck.Arbitrary.Arbitrary STLC.Ty
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ STLC.Ty
+                  Main.$fArbitraryTy_$carbitrary
+                  Main.$fArbitraryTy_$s$dmshrink -}
+a9c15871e5dc79b6a32014284379f87b
+  $fArbitraryTy_$carbitrary :: Test.QuickCheck.Gen.Gen STLC.Ty
+53a258d2e7001cf2d8223d1674676753
+  $fArbitraryTy_$s$dmshrink :: STLC.Ty -> [STLC.Ty]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (-1, True, True)
+                (\ ds1 :: STLC.Ty -> GHC.Types.[] @ STLC.Ty) -}
+1992674feca6882ec2c995d709951917
+  $wa :: Test.QuickCheck.Random.QCGen -> GHC.Prim.Int# -> STLC.Term
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><L,U>, Inline: [0],
+     Unfolding: (\ w :: Test.QuickCheck.Random.QCGen
+                   ww :: GHC.Prim.Int# ->
+                 let {
+                   ds1 :: (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                   = case w `cast`
+                          (Test.QuickCheck.Random.NTCo:QCGen[0]) of ww1 { System.Random.TF.Gen.TFGen ww2 ww3 ww4 ww5 ww6 ww7 ->
+                     case System.Random.TF.Gen.$wtfGenSplit
+                            ww2
+                            ww3
+                            ww4
+                            ww5 of ww8 { (#,#) ww9 ww10 ->
+                     (ww9, ww10) } }
+                 } in
+                 Main.main4
+                   (GHC.Types.[] @ (STLC.Id, STLC.Ty))
+                   (Test.QuickCheck.Gen.$wa3
+                      @ STLC.Ty
+                      Main.$fArbitraryTy_$carbitrary
+                      Main.main3
+                      (case ds1 of wild { (,) g1 g2 ->
+                       g1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                      ww)
+                   (case ds1 of wild { (,) g1 g2 ->
+                    g2 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                   (GHC.Types.I# ww)) -}
+cf123cab51cf528f18611d6230d6972c
+  convertTerm :: STLC.Term -> TypeInfer.Term
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+a925c2625d5b11951a35e0178f21028d
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+a94c9770baa1ffaf8bfcb2de38f375f0
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ s :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case Test.QuickCheck.Test.verboseCheck1
+                        @ Test.QuickCheck.Property.Property
+                        Test.QuickCheck.Property.$fTestableProperty
+                        Main.main5
+                          `cast`
+                        (Trans
+                             (Sym (Test.QuickCheck.Gen.NTCo:Gen[0]
+                                       <Test.QuickCheck.Property.Prop>_R))
+                             (Sym (Test.QuickCheck.Property.NTCo:Property[0])))
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 Test.QuickCheck.Test.verboseCheck1
+                   @ Test.QuickCheck.Property.Property
+                   Test.QuickCheck.Property.$fTestableProperty
+                   Main.main2
+                     `cast`
+                   (Trans
+                        (Sym (Test.QuickCheck.Gen.NTCo:Gen[0]
+                                  <Test.QuickCheck.Property.Prop>_R))
+                        (Sym (Test.QuickCheck.Property.NTCo:Property[0])))
+                   ipv }) -}
+9d67cd0b6f677d2a27594aa419d3322c
+  main2 ::
+    Test.QuickCheck.Random.QCGen
+    -> GHC.Types.Int -> Test.QuickCheck.Property.Prop
+  {- Arity: 2,
+     Unfolding: (\ eta :: Test.QuickCheck.Random.QCGen
+                   eta1 :: GHC.Types.Int ->
+                 let {
+                   ds1 :: (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                   = case eta
+                            `cast`
+                          (Test.QuickCheck.Random.NTCo:QCGen[0]) of ww { System.Random.TF.Gen.TFGen ww1 ww2 ww3 ww4 ww5 ww6 ->
+                     case System.Random.TF.Gen.$wtfGenSplit
+                            ww1
+                            ww2
+                            ww3
+                            ww4 of ww7 { (#,#) ww8 ww9 ->
+                     (ww8, ww9) } }
+                 } in
+                 let {
+                   x :: STLC.Term
+                   = case eta1 of ww { GHC.Types.I# ww1 ->
+                     Main.$wa
+                       (case ds1 of wild { (,) g1 g2 ->
+                        g1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                       ww1 }
+                 } in
+                 (Test.QuickCheck.Property.counterexample_$scounterexample1
+                    (STLC.$fShowTerm_$cshowsPrec
+                       GHC.Show.shows18
+                       x
+                       (GHC.Types.[] @ GHC.Types.Char))
+                    (case TypeInfer.type_infer (Main.convertTerm x) of wild {
+                       GHC.Base.Nothing -> GHC.Types.False
+                       GHC.Base.Just ipv -> GHC.Types.True }))
+                   `cast`
+                 (Trans
+                      (Test.QuickCheck.Property.NTCo:Property[0])
+                      (Test.QuickCheck.Gen.NTCo:Gen[0]
+                           <Test.QuickCheck.Property.Prop>_R))
+                   (case ds1 of wild { (,) g1 g2 ->
+                    g2 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                   eta1) -}
+40dc08674ec2f669e1bf8d46ea60167a
+  main3 :: STLC.Ty -> GHC.Types.Bool
+  {- Arity: 1, Unfolding: (Main.taut (GHC.Types.[] @ STLC.Ty)) -}
+c9357569e48e2d6080dd25617df8111a
+  main4 ::
+    [(STLC.Id, STLC.Ty)]
+    -> STLC.Ty
+    -> Test.QuickCheck.Random.QCGen
+    -> GHC.Types.Int
+    -> STLC.Term
+  {- Arity: 4, Strictness: <S,U><S,U><L,1*U(U,U,U,1*U,A,A)><L,U> -}
+34f4726485120973141c8d18425e8b1e
+  main5 ::
+    Test.QuickCheck.Random.QCGen
+    -> GHC.Types.Int -> Test.QuickCheck.Property.Prop
+  {- Arity: 2,
+     Unfolding: (\ eta :: Test.QuickCheck.Random.QCGen
+                   eta1 :: GHC.Types.Int ->
+                 let {
+                   ds1 :: (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                   = case eta
+                            `cast`
+                          (Test.QuickCheck.Random.NTCo:QCGen[0]) of ww { System.Random.TF.Gen.TFGen ww1 ww2 ww3 ww4 ww5 ww6 ->
+                     case System.Random.TF.Gen.$wtfGenSplit
+                            ww1
+                            ww2
+                            ww3
+                            ww4 of ww7 { (#,#) ww8 ww9 ->
+                     (ww8, ww9) } }
+                 } in
+                 let {
+                   x :: STLC.Term
+                   = case eta1 of ww { GHC.Types.I# ww1 ->
+                     Main.$wa
+                       (case ds1 of wild { (,) g1 g2 ->
+                        g1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                       ww1 }
+                 } in
+                 (Test.QuickCheck.Property.counterexample_$scounterexample1
+                    (STLC.$fShowTerm_$cshowsPrec
+                       GHC.Show.shows18
+                       x
+                       (GHC.Types.[] @ GHC.Types.Char))
+                    (case STLC.type_infer x of wild {
+                       GHC.Base.Nothing -> GHC.Types.False
+                       GHC.Base.Just ipv -> GHC.Types.True }))
+                   `cast`
+                 (Trans
+                      (Test.QuickCheck.Property.NTCo:Property[0])
+                      (Test.QuickCheck.Gen.NTCo:Gen[0]
+                           <Test.QuickCheck.Property.Prop>_R))
+                   (case ds1 of wild { (,) g1 g2 ->
+                    g2 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                   eta1) -}
+bd5b1b86df484275818a94249a6bb238
+  main6 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+a542c9df9fa5dbdbcd37523fae2d48fd
+  taut :: [STLC.Ty] -> STLC.Ty -> GHC.Types.Bool
+  {- Arity: 2, Strictness: <L,U><S,1*U> -}
+instance Test.QuickCheck.Arbitrary.Arbitrary [STLC.Nat]
+  = Main.$fArbitraryNat
+instance Test.QuickCheck.Arbitrary.Arbitrary [STLC.Ty]
+  = Main.$fArbitraryTy
+"SPEC/Main $dmshrink @ Nat" [ALWAYS] forall $dArbitrary :: Test.QuickCheck.Arbitrary.Arbitrary
+                                                             STLC.Nat
+  Test.QuickCheck.Arbitrary.$dmshrink @ STLC.Nat $dArbitrary
+  = Main.$fArbitraryNat_$s$dmshrink
+"SPEC/Main $dmshrink @ Ty" [ALWAYS] forall $dArbitrary :: Test.QuickCheck.Arbitrary.Arbitrary
+                                                            STLC.Ty
+  Test.QuickCheck.Arbitrary.$dmshrink @ STLC.Ty $dArbitrary
+  = Main.$fArbitraryTy_$s$dmshrink
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

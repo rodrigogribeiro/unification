@@ -1,0 +1,63 @@
+\subsection{Termination Proof}
+\label{termination}
+
+\newcommand{\degree}{\text{\it degree\/}}
+
+For any list of equalities the unification algorithm always
+terminates, either by returning their most general unifier or by
+establishing that there is no unifier. The termination argument uses a
+notion of \degree\ of a list of constraints $\mathbb{C}$, written as
+$\degree(\mathbb{C})$, defined as a pair $(m,n)$, where $m$ is the
+number of distinct type variables in $\mathbb{C}$ and $n$ is the total
+size of the types in $\mathbb{C}$. We let $(m,n)\prec (m',n')$ denote
+the usual lexicographic ordering of degrees.
+
+Textbooks usually consider it straightforward that each clause of the
+unification algorithm either terminates (with success or failure) or
+else make a recursive call with a list of constraints that has a
+lexicographically smaller degree. Since the implemented unification
+function is defined by recursion over proofs of lexicographic ordering
+of degrees, we must ensure that all recursive calls are made on
+smaller lists of constraints.  In lines 3 and 4 of Figure
+\ref{unifyalgorithm}, the recursive calls are made on a list of
+constraints of smaller degree, because the list of constraints
+$[\alpha\mapsto\tau]\mathbb{C}$ will decrease by one the number of
+type variables occurring in it. This is formalized in the following
+lemma:
+
+\begin{Lemma}[Substitution application decreases degree]\label{lem-termination-1}
+For all variables $\alpha \in \mathcal{V}$, all well-formed types
+$\tau$ and well-formed lists of constraints $\mathbb{C}$, it holds
+that 
+  \[ \degree([\alpha\mapsto \tau]\,\mathbb{C})\prec 
+     \degree((\alpha \eeq \tau) :: \mathbb{C})\]
+\end{Lemma}
+\begin{proof}
+Induction over $\mathbb{C}$. 
+% and the lexicographic product definition. hm?
+\end{proof}
+
+On line 5 of Figure \ref{unifyalgorithm}, we have that the recursive
+call is made on a constraint that has more equalities than the
+original but has a smaller degree, as shown by the following lemma.
+
+\begin{Lemma}[Fewer Arrows implies lower degree]\label{lem-termination-2}
+For all well-formed types $\tau_1, \tau_2, \tau_1', \tau_2'$ and all well-formed lists of constraints $\mathbb{C}$, it holds that
+\[\degree((\tau_1\eeq\tau_1',\tau_2\eeq\tau_2') :: \mathbb{C})
+\prec
+\degree((\tau_1\to\tau_2\eeq\tau_1'\to\tau_2') :: \mathbb{C})\]
+\end{Lemma}
+\begin{proof}
+Immediate from Lemma \ref{appsize}.
+\end{proof}
+Finally, the recursive calls in lines 2 and 6 also decrease the degree
+of the input list of constraints, according to the following:
+
+\begin{Lemma}[Less constraints implies lower degree]\label{lem-termination-3}
+For all well-formed types $\tau$, $\tau'$ and all well-formed list of
+constraints $\mathbb{C}$, it holds that 
+  \[ \degree(\mathbb{C}) \prec \degree(\{\tau \eeq \tau'\} :: \mathbb{C})\]
+\end{Lemma}
+\begin{proof}
+Immediate from Lemma \ref{lengthsize}.
+\end{proof}

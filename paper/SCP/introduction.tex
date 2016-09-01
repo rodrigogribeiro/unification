@@ -1,0 +1,96 @@
+\section{Introduction}
+
+Modern functional programming languages like Haskell~\ccite{Haskell98}
+and SML~\ccite{Milner90} allows programmers to write program texts
+without requiring programmers to write type annotations in
+programs. Compilers for these languages can discover missing type
+information through a process called type inference~\ccite{Milner78}.
+
+Type inference algorithms are usually divided into two components:
+constraint generation and constraint solving~\ccite{Pottier05}. For
+languages that use ML-style (or parametric) polymorphism, constraint
+solving reduces to first order unification.
+
+A sound and complete algorithm for first order unification is due to
+Robinson~\ccite{Robinson65}.  The soundness and completeness proofs
+have a constructive nature, and can thus be formalized in proof
+assistant systems based on type theory, like Coq~\ccite{Bertot04} and
+Agda~\ccite{Bove09}. Formalizations of unification have been reported
+before in the literature~\ccite{Paulson93,Bove99,McBride03,Kothari10},
+using different proof assistants, but none of them follows the style
+of textbook proofs (cf.~e.g.~\ccite{Mitchell96,Pierce02}).
+
+As a first step towards a full formalization of a type inference
+algorithm for Haskell, in this article, we describe
+an axiom-free formalization of type unification in the Coq proof
+assistant, that follows classic algorithms on type systems for
+programming languages~\ccite{Mitchell96,Pierce02}.  The formalization
+is ``axiom-free'' because it does not depend on axioms like function
+extensionality, proof irrelevance or the law of the excluded middle,
+i.e.~our results are integrally proven in Coq.
+
+More specifically, our contributions are:
+\begin{enumerate}
+
+  \item A mechanization of a termination proof, as described in
+    e.g.~\ccite{Mitchell96,Pierce02}. These textbook proofs are
+    referred to as ``straightforward''. In our formalization, it was
+    necessary to decompose the proof in several lemmas in order to
+    convince Coq's termination checker.
+
+  \item A correct by construction formalization of unification. In our
+    formalization the unification function has a dependent type that
+    specifies that unification produces either the most general
+    unifier of a given set of equality constraints or a proof that
+    explains why this set of equalities does not have a unifier
+    (i.e.~our unification definition is a view~\ccite{McBride04} on
+    lists of equality constraints).
+
+  \item We use the developed formalization to certify a type inference
+    algorithm for the simply typed $\lambda$-calculus (STLC) in Coq.
+    The type inference algorithm is constructed by combining
+    constraint generation and constraint solving (unification). We
+    also use Coq extraction feature to produce a Haskell
+    implementation of the formalized type inference algorithm.
+
+\end{enumerate}
+
+We chose Coq to develop this formalization because it is an industrial
+strength proof assistant that has been used in several large scale
+projects such as a Certified C compiler~\ccite{XLeroy09} and a Java
+Card platform~\ccite{Barthe02}, as well as on the verification of
+mathematical theorems (cf.~e.g.~\ccite{Gonthier07,Gonthier13}).
+
+This paper extends a previous publication at SBMF 2015~\cite{RibeiroC15} mainly
+by (1) defining a correct constraint-based type inference algorithm for STLC by
+combining a constraint generator with the previously formalized unification
+algorithm, and (2) producing a Haskell implementation of type inference for
+STLC from our Coq formalization.
+
+The rest of this paper is organized as follows. Section \ref{coq}
+presents a brief introduction to the Coq proof assistant.  Section
+\ref{definitions} presents some definitions used in the
+formalization. Section \ref{algorithm-section} presents the
+unification algorithm. Termination, soundness and completeness proofs
+are described in Sections \ref{termination} and \ref{soundness},
+respectively. Section \ref{tactics} presents details about proof
+automation techniques used in our formalization and section
+\ref{evaluation} reports on our efforts on using the formalized
+algorithm in the implementation of a type inference algorithm.
+Section \ref{related} presents related work and Section
+\ref{conclusion} concludes.
+
+While all the code on which this paper is based has been developed in
+Coq, we adopt a ``lighter'' syntax in the presentation of its code
+fragments. In the introductory Section \ref{coq}, however, we present
+small Coq source code pieces. We chose this presentation style in
+order to improve readability, because functions that use dependently
+typed pattern matching require a high number of type annotations, that
+would deviate from our objective of providing a formalization that is
+easy to understand.
+%The only exception is the tactics used to prove
+%soundness and completeness theorems, that are presented in Section
+%\ref{tactics}.
+For theorems and lemmas, we sketch the proof strategy but omit tactic
+scripts. The developed formalization uses Coq version 8.5pl2 and it is
+available online~\ccite{unify-rep}.

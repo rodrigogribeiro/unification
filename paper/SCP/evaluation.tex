@@ -1,0 +1,104 @@
+\section{Extracting a Type Inference Algorithm}\label{evaluation}
+
+\subsection{Defining the Type Inference Algorithm}
+
+Our main goal in the formalization of a type unification algorithm is
+to build a certified type inference tool. The inference algorithm
+receives a term and returns its inferred type (using constructor
+\lstinline|Some| of Coq standard library \lstinline|option| type) or
+signals a failure, if no such type exists. The definition of the
+algorithm is presented below.
+\[
+   \begin{array}{lcl}
+      \text{infer}\:\text{e} & = & t, \text{ where:}\\
+       & & \begin{array}{lcl}
+              \alpha     & \text{is}  & \text{fresh.} \\
+              \mathbb{C} & = & \langle\langle \emptyset \vdash e : \alpha \rangle\rangle\\
+              R          & = & \unify(\mathbb{C}) \\
+              t          & = & \text{if }R = \texttt{Some }S \texttt{ then } S(\alpha) \\
+                         &   & \texttt{ else } \text{fail}
+           \end{array}
+   \end{array}
+\]
+Basically, the algorithm calls the constraint generator for input term using a
+fresh type variable $\alpha$ as its type and passing the produced constraint
+to unification algorithm. If unification succeeds, we apply the resulting
+substitution to $\alpha$ or signal a failure, otherwise.
+
+Soundness of type inference is ensured by the following theorem.
+
+\begin{Theorem}[Type inference soundness]
+   For all terms $e$ and types $\tau$, if $\text{infer }e = \tau$ then
+   $\emptyset \vdash e : \tau$.
+\end{Theorem}
+\begin{proof}
+   By structural induction on $e$ using lemma \ref{lem:genctr} and
+   theorem \ref{thm:substinfer}.
+\end{proof}
+
+\subsection{Extracting a Certified Type Inference Algorithm}
+
+Now that we have defined a verified type inference algorithm for STLC,
+how can we use it? Our strategy is to replace code of a Haskell type
+checker for STLC tested using QuickCheck~\cite{Claessen00}, by
+extracted Haskell code from our formalization. This idea of replacing
+code tested with QuickCheck by Coq extracted code isn't new and was
+already used to formalize core functionality of a window manager
+implemented in Haskell~\cite{Swierstra12}.
+
+In order to test extracted code, we have implemented a type inference
+algorithm for STLC in Haskell and built a testsuite for it. We have
+implemented a generator for well-typed $\lambda$-terms and use
+QuickCheck to test the following property on both algorithms:
+\[
+   \forall e. \forall \tau. \, \emptyset\, \vdash e : \tau \to \text{infer(e) = } \tau
+\]
+i.e. given a well-typed closed term $e$, the type inference
+algorithm returns it's correct type.
+
+Since we have formalized type inference for STLC in Coq, such
+extracted code should be obviously correct. In principle, code Coq
+extraction preserves semantics if no extraction customization command
+is used~\cite{Letouzey02}. Commands for customizing extraction
+behavior could introduce bugs and invalidate any extraction
+guarantees.  Also, Coq extraction mechanism doesn't make use of any
+standard Haskell library type.  Motivated by this, we've made some
+customizations trying to produce code that use as much of Haskell's
+library as possible. In order to validate the correctness of our
+customizations, we have submitted extracted code to our QuickCheck
+based testsuite and it passed in all tests for random generated terms.
+
+For the complete type inference algorithm, our Haskell implementation
+is written in 142 lines of code, while Coq extracted code is written
+in around 300 lines. Such difference is justified as follows:
+
+\begin{enumerate}
+
+  \item Coq extraction doesn't make use of any predefined Haskell type
+    or type class. A possible fix is pointed by
+    Swierstra~\cite{Swierstra12}, make use of axioms and sections to
+    postulate the existence of an equality test and define some
+    wrapper Haskell functions that calls extracted code with a proper
+    \lstinline|Eq|\footnote{Type class \lstinline|Eq| denotes the set
+      of all Haskell types that supports equality
+      tests~\cite{Haskell98}.}  dictionary. Such situation is even
+    worse in our context, since our Haskell implementation makes use
+    of monads and Haskell's \lstinline|do|-notation for monadic
+    programming.  Since extraction isn't aware of Haskell's
+    \lstinline|Monad| type class and its associated syntactic sugar,
+    code produced expose, in several places, a pattern-maching
+    structure that could be hidden by the monadic ``bind'' function.
+
+  \item Most of the code used in the formalization to produce the
+    termination argument for unification wasn't erased by program
+    extraction. Coq code for unification takes an additional argument
+    to ensure that all recursive calls are made on constraints with a
+    smaller degree. We have defined several functions to manipulate
+    variable contexts to represent that whenever we solve a type
+    variable in unification, it should be removed from variable
+    context, \V. Since, such arguments use functions that manipulate
+    such non-propositional values (i.e. values whose type isn't in
+    sort \lstinline|Prop|), they aren't removed by extraction and it
+    resulted in functions with unnecessary parameters in Haskell code
+    for unification.
+\end{enumerate}

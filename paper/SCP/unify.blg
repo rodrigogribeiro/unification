@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: unify.aux
+The style file: splncs.bst
+Database file #1: unify.bib
+Warning--string name "springer" is undefined
+--line 1190 of file unify.bib
+Warning--string name "lncs" is undefined
+--line 1190 of file unify.bib
+Warning--empty publisher in Haskell98
+You've used 42 entries,
+            2087 wiz_defined-function locations,
+            803 strings with 11431 characters,
+and the built_in function-call counts, 12721 in all, are:
+= -- 1347
+> -- 366
+< -- 35
++ -- 138
+- -- 96
+* -- 836
+:= -- 1652
+add.period$ -- 61
+call.type$ -- 42
+change.case$ -- 34
+chr.to.int$ -- 0
+cite$ -- 43
+duplicate$ -- 696
+empty$ -- 1270
+format.name$ -- 96
+if$ -- 3183
+int.to.chr$ -- 0
+int.to.str$ -- 42
+missing$ -- 47
+newline$ -- 213
+num.names$ -- 62
+pop$ -- 156
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 475
+stack$ -- 0
+substring$ -- 772
+swap$ -- 362
+text.length$ -- 35
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 124
+width$ -- 44
+write$ -- 492
+(There were 3 warnings)

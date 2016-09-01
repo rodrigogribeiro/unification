@@ -1,0 +1,450 @@
+
+==================== FINAL INTERFACE ====================
+2016-07-24 16:26:41.2945 UTC
+
+interface infer_LATtaxaRTSJFnVvXBzV43n:TypeInfer 7103
+  interface hash: 2f4303c4098b3f601890d5eb153d5a78
+  ABI hash: 4559068833fa6567076dba2a5222ba78
+  export-list hash: 82dadb71535cf0f48ae240b32e6ff4c2
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 4c0a7b65a6dddbc4161c2e2bfabe3dc3
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  TypeInfer.__
+  TypeInfer.acc_rect
+  TypeInfer.add
+  TypeInfer.add_constr
+  TypeInfer.app
+  TypeInfer.apply_subst
+  TypeInfer.apply_subst_constraint
+  TypeInfer.bind
+  TypeInfer.eq_dec
+  TypeInfer.eq_id_dec
+  TypeInfer.eq_ty_dec
+  TypeInfer.failT
+  TypeInfer.fresh
+  TypeInfer.gen_constr
+  TypeInfer.look
+  TypeInfer.minus
+  TypeInfer.mk_constraints
+  TypeInfer.nat_rec
+  TypeInfer.nat_rect
+  TypeInfer.occurs_dec
+  TypeInfer.remove
+  TypeInfer.ret
+  TypeInfer.sub
+  TypeInfer.sumbool_rec
+  TypeInfer.sumbool_rect
+  TypeInfer.ty_rec
+  TypeInfer.ty_rect
+  TypeInfer.type_infer
+  TypeInfer.unify
+  TypeInfer.unify_body
+  TypeInfer.well_founded_induction
+  TypeInfer.well_founded_induction_type
+  TypeInfer.Constr
+  TypeInfer.Constraints
+  TypeInfer.Id
+  TypeInfer.List{TypeInfer.Cons TypeInfer.Nil}
+  TypeInfer.List_constr
+  TypeInfer.Nat{TypeInfer.O TypeInfer.S}
+  TypeInfer.Sig
+  TypeInfer.Substitution
+  TypeInfer.TcM
+  TypeInfer.Tc_state{TypeInfer.MkState}
+  TypeInfer.Term{TypeInfer.App_t TypeInfer.Const_t TypeInfer.Lam_t TypeInfer.Var_t}
+  TypeInfer.Ty{TypeInfer.Arr TypeInfer.Con TypeInfer.Var}
+  TypeInfer.Tyctx
+  TypeInfer.Unify_type
+  TypeInfer.Varctxt
+module dependencies:
+package dependencies: base-4.8.2.0* ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+family instance modules: base-4.8.2.0:Control.Applicative
+                         base-4.8.2.0:Data.Either base-4.8.2.0:Data.Monoid
+                         base-4.8.2.0:Data.Type.Equality base-4.8.2.0:GHC.Generics
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+17a30d130c6073fe9f048b3a97c1f1b5
+  $wunify_body ::
+    TypeInfer.Varctxt
+    -> TypeInfer.List_constr
+    -> (TypeInfer.Constraints -> () -> TypeInfer.Unify_type)
+    -> GHC.Base.Maybe TypeInfer.Substitution
+  {- Arity: 3, Strictness: <L,U><S,1*U><L,1*C1(C1(C1(U)))>,
+     Inline: [0] -}
+a12133c0f2577071e0a8a61b83fba1ab
+  type Constr = (TypeInfer.Ty, TypeInfer.Ty)
+0c964155b51842c88b09041e5511b774
+  type Constraints = (TypeInfer.Varctxt, TypeInfer.List_constr)
+87b16e33e7adbd11b483a1d41d0aa4fa
+  type Id = TypeInfer.Nat
+8db209cc2ec8cef4ed4e9448aed8c955
+  data List a = Nil | Cons a (TypeInfer.List a)
+    Promotable
+5ee0039eefd49e256313f315e97613b6
+  type List_constr = TypeInfer.List TypeInfer.Constr
+108f00d5a1bf82d1100051b80632b405
+  data Nat = O | S TypeInfer.Nat
+    Promotable
+b8f9f0fadeb13a918fb1d3a9a6ab2a0a
+  type Sig a = a
+3dca2fcad0fba337f1ddce86c9fa1c8e
+  type Substitution = TypeInfer.List (TypeInfer.Id, TypeInfer.Ty)
+5a2adb3cbba4cde6ce2ce81ee9156d8e
+  type TcM a =
+    TypeInfer.Tc_state -> GHC.Base.Maybe (TypeInfer.Tc_state, a)
+a39b3ad02d46aeb89abc3470c41c209b
+  data Tc_state
+    = MkState TypeInfer.Id
+              (TypeInfer.List TypeInfer.Id)
+              (TypeInfer.List (TypeInfer.Ty, TypeInfer.Ty))
+d53a046b704b15fd055377cd157f7aad
+  data Term
+    = Var_t TypeInfer.Id
+    | App_t TypeInfer.Term TypeInfer.Term
+    | Lam_t TypeInfer.Id TypeInfer.Term
+    | Const_t
+5725b00537020e1d32d5f144799c4223
+  data Ty = Var TypeInfer.Id | Arr TypeInfer.Ty TypeInfer.Ty | Con
+f27a417b2a73127522a2d5752de2e1e6
+  type Tyctx = TypeInfer.List (TypeInfer.Id, TypeInfer.Ty)
+35503ff4488d9ebd93db1496219b04de
+  type Unify_type = () -> GHC.Base.Maybe TypeInfer.Substitution
+989fbcf50672c014a450b2f7b5145404
+  type Varctxt = TypeInfer.List TypeInfer.Id
+e6c83cbb9975fab9f5fcdc7f0e5f5e4e
+  __ :: any
+  {- Strictness: b -}
+de2b7f99d854d99657615fcc7dd204d2
+  acc_rect :: (a1 -> () -> (a1 -> () -> a2) -> a2) -> a1 -> a2
+  {- Arity: 2, Strictness: <C(C(C(S))),C(C1(C1(U)))><L,U> -}
+c47c71599265a07ca402034b5bcdb452
+  add :: TypeInfer.Nat -> TypeInfer.Nat -> TypeInfer.Nat
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
+4bc75629505e069110ec17c6374ebb94
+  add_constr :: TypeInfer.Ty -> TypeInfer.Ty -> TypeInfer.TcM ()
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><L,U><S,1*U(U,U,U)>m2,
+     Unfolding: InlineRule (3, True, False)
+                (\ t :: TypeInfer.Ty t' :: TypeInfer.Ty s :: TypeInfer.Tc_state ->
+                 case s of wild { TypeInfer.MkState n ts cs ->
+                 GHC.Base.Just
+                   @ (TypeInfer.Tc_state, ())
+                   (TypeInfer.MkState
+                      n
+                      ts
+                      (TypeInfer.Cons @ (TypeInfer.Ty, TypeInfer.Ty) (t, t') cs),
+                    GHC.Tuple.()) }) -}
+ef2fa27e0311cc01a9ffa29b972acb55
+  app :: TypeInfer.List a1 -> TypeInfer.List a1 -> TypeInfer.List a1
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
+7850f3ae46fb9075b66fc3eed4507cbd
+  apply_subst ::
+    TypeInfer.Substitution -> TypeInfer.Ty -> TypeInfer.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+cd80a4b1c725abf6c9afdb87c071202e
+  apply_subst_constraint ::
+    TypeInfer.Substitution
+    -> TypeInfer.List_constr -> TypeInfer.List_constr
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+648e6e0ddf53d3ca3272c2c27bc599f5
+  bind ::
+    TypeInfer.TcM a1 -> (a1 -> TypeInfer.TcM a2) -> TypeInfer.TcM a2
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <C(S),1*C1(U)><L,1*C1(C1(U))><L,U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a1
+                   @ a2
+                   c :: TypeInfer.TcM a1
+                   c' :: a1 -> TypeInfer.TcM a2
+                   s :: TypeInfer.Tc_state ->
+                 case c s of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ (TypeInfer.Tc_state, a2)
+                   GHC.Base.Just p -> case p of wild1 { (,) s' v -> c' v s' } }) -}
+47e25c8033794d40daeb56d9786bd881
+  eq_dec :: TypeInfer.Nat -> TypeInfer.Nat -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ n :: TypeInfer.Nat ->
+                 TypeInfer.nat_rect
+                   @ (TypeInfer.Nat -> GHC.Types.Bool)
+                   TypeInfer.eq_dec2
+                   TypeInfer.eq_dec1
+                   n) -}
+77622b835333791ebd556d815fdd9e9c
+  eq_dec1 ::
+    TypeInfer.Nat
+    -> (TypeInfer.Nat -> GHC.Types.Bool)
+    -> TypeInfer.Nat
+    -> GHC.Types.Bool
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,A><L,1*C1(U)><S,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ ds :: TypeInfer.Nat
+                   iHn :: TypeInfer.Nat -> GHC.Types.Bool
+                   m :: TypeInfer.Nat ->
+                 case m of wild {
+                   TypeInfer.O -> GHC.Types.True TypeInfer.S m0 -> iHn m0 }) -}
+201781915c2dfee3e67b3ac679446c20
+  eq_dec2 :: TypeInfer.Nat -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ m :: TypeInfer.Nat ->
+                 case m of wild {
+                   TypeInfer.O -> GHC.Types.False
+                   TypeInfer.S ds -> GHC.Types.True }) -}
+017ea196d6c7269b7182987a776b4b47
+  eq_id_dec :: TypeInfer.Id -> TypeInfer.Id -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (0, True, True) TypeInfer.eq_dec -}
+df24f93c229b11f189392a8049abf95b
+  eq_ty_dec :: TypeInfer.Ty -> TypeInfer.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ t :: TypeInfer.Ty t' :: TypeInfer.Ty ->
+                 TypeInfer.ty_rect
+                   @ (TypeInfer.Ty -> GHC.Types.Bool)
+                   TypeInfer.eq_ty_dec3
+                   TypeInfer.eq_ty_dec2
+                   TypeInfer.eq_ty_dec1
+                   t
+                   t') -}
+91d4d9a01c1179c7c0066b9ba1ed8d51
+  eq_ty_dec1 :: TypeInfer.Ty -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ t'0 :: TypeInfer.Ty ->
+                 case t'0 of wild {
+                   DEFAULT -> GHC.Types.True TypeInfer.Con -> GHC.Types.False }) -}
+a42d50775dada8ad89f1550b4ff38cb2
+  eq_ty_dec2 ::
+    TypeInfer.Ty
+    -> (TypeInfer.Ty -> GHC.Types.Bool)
+    -> TypeInfer.Ty
+    -> (TypeInfer.Ty -> GHC.Types.Bool)
+    -> TypeInfer.Ty
+    -> GHC.Types.Bool
+  {- Arity: 5, HasNoCafRefs,
+     Strictness: <L,A><L,1*C1(U)><L,A><L,1*C1(U)><S,1*U>,
+     Unfolding: InlineRule (5, True, False)
+                (\ ds :: TypeInfer.Ty
+                   h :: TypeInfer.Ty -> GHC.Types.Bool
+                   ds1 :: TypeInfer.Ty
+                   h0 :: TypeInfer.Ty -> GHC.Types.Bool
+                   t'0 :: TypeInfer.Ty ->
+                 case t'0 of wild {
+                   DEFAULT -> GHC.Types.True
+                   TypeInfer.Arr t2 t3
+                   -> case h t2 of wild1 {
+                        GHC.Types.False -> h0 t3 GHC.Types.True -> GHC.Types.True } }) -}
+2532f0fdf1171389c8d2f64dec50a076
+  eq_ty_dec3 :: TypeInfer.Id -> TypeInfer.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ i :: TypeInfer.Id t'0 :: TypeInfer.Ty ->
+                 case t'0 of wild {
+                   DEFAULT -> GHC.Types.True
+                   TypeInfer.Var i0
+                   -> TypeInfer.nat_rect
+                        @ (TypeInfer.Nat -> GHC.Types.Bool)
+                        TypeInfer.eq_dec2
+                        TypeInfer.eq_dec1
+                        i
+                        i0 }) -}
+80d691a0ab70b4c1a42e57894aef6589
+  failT :: TypeInfer.TcM a1
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ @ a1 ds :: TypeInfer.Tc_state ->
+                 GHC.Base.Nothing @ (TypeInfer.Tc_state, a1)) -}
+5ccc2b65dcf4fb67c4ec9b38b1138805
+  fresh :: TypeInfer.TcM TypeInfer.Ty
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,1*U,U)>m2,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: TypeInfer.Tc_state ->
+                 case w of ww { TypeInfer.MkState ww1 ww2 ww3 ->
+                 GHC.Base.Just
+                   @ (TypeInfer.Tc_state, TypeInfer.Ty)
+                   (TypeInfer.MkState
+                      (TypeInfer.add TypeInfer.fresh1 ww1)
+                      (TypeInfer.app
+                         @ TypeInfer.Id
+                         ww2
+                         (TypeInfer.Cons @ TypeInfer.Id ww1 (TypeInfer.Nil @ TypeInfer.Id)))
+                      ww3,
+                    TypeInfer.Var ww1) }) -}
+f9773a9504e29327ac9321bdc843fd15
+  fresh1 :: TypeInfer.Nat
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (TypeInfer.S TypeInfer.O) -}
+77e5b9f75fa1db84d6c274fb8353e734
+  gen_constr ::
+    TypeInfer.Tyctx -> TypeInfer.Term -> TypeInfer.TcM TypeInfer.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+23429fa9895c24e2a02379595dd1564e
+  look ::
+    TypeInfer.Id -> TypeInfer.Tyctx -> TypeInfer.TcM TypeInfer.Ty
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+0d89425446ceb9c0f15eae3f019ff533
+  minus ::
+    TypeInfer.Varctxt
+    -> TypeInfer.List TypeInfer.Id -> TypeInfer.Varctxt
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+f1a3ca5a1f15f6fe8f67d1e6f754a5e3
+  mk_constraints ::
+    TypeInfer.Varctxt -> TypeInfer.List_constr -> TypeInfer.Constraints
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,U>m,
+     Unfolding: InlineRule (0, True, True)
+                (GHC.Tuple.(,) @ TypeInfer.Varctxt @ TypeInfer.List_constr) -}
+10e4706296d0ba8d9722cd8e4cbdbe56
+  nat_rec :: a1 -> (TypeInfer.Nat -> a1 -> a1) -> TypeInfer.Nat -> a1
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,1*U><L,C(C1(U))><S,1*U>,
+     Unfolding: InlineRule (0, True, True) TypeInfer.nat_rect -}
+e615f44dd19715668645650ecaff1763
+  nat_rect ::
+    a1 -> (TypeInfer.Nat -> a1 -> a1) -> TypeInfer.Nat -> a1
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*U><L,C(C1(U))><S,1*U> -}
+3187ad86e390601660dff316e25bcd80
+  occurs_dec :: TypeInfer.Id -> TypeInfer.Ty -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+09f8c6a831eb4d65679ce4d34c9a3b9e
+  remove :: TypeInfer.Id -> TypeInfer.Varctxt -> TypeInfer.Varctxt
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+7074b7b3d2a2c377e6f952d448797fb2
+  ret :: a1 -> TypeInfer.TcM a1
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,U>m2,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a1 x :: a1 s :: TypeInfer.Tc_state ->
+                 GHC.Base.Just @ (TypeInfer.Tc_state, a1) (s, x)) -}
+e4242d3985bfda411e6c4f3e43d48b1e
+  sub :: TypeInfer.Ty -> TypeInfer.Id -> TypeInfer.Ty -> TypeInfer.Ty
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><L,U><S,1*U> -}
+364297238f86e107ef18cc2fbc1de063
+  sumbool_rec :: (() -> a1) -> (() -> a1) -> GHC.Types.Bool -> a1
+  {- Arity: 3, Strictness: <L,1*C1(U)><L,1*C1(U)><S,1*U>,
+     Unfolding: InlineRule (0, True, True) TypeInfer.sumbool_rect -}
+a356872dc82ff23adbe6b9d7f1960ceb
+  sumbool_rect :: (() -> a1) -> (() -> a1) -> GHC.Types.Bool -> a1
+  {- Arity: 3, Strictness: <L,1*C1(U)><L,1*C1(U)><S,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a1 f :: () -> a1 f0 :: () -> a1 s :: GHC.Types.Bool ->
+                 case s of wild {
+                   GHC.Types.False -> f (TypeInfer.__ @ ())
+                   GHC.Types.True -> f0 (TypeInfer.__ @ ()) }) -}
+7246c08dd541518d2cc9a9f4b63ecf0f
+  ty_rec ::
+    (TypeInfer.Id -> a1)
+    -> (TypeInfer.Ty -> a1 -> TypeInfer.Ty -> a1 -> a1)
+    -> a1
+    -> TypeInfer.Ty
+    -> a1
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <L,C(U)><L,C(C1(C1(C1(U))))><L,U><S,1*U>,
+     Unfolding: InlineRule (0, True, True) TypeInfer.ty_rect -}
+ccadbde653f48bcb7b2da47c32371cbb
+  ty_rect ::
+    (TypeInfer.Id -> a1)
+    -> (TypeInfer.Ty -> a1 -> TypeInfer.Ty -> a1 -> a1)
+    -> a1
+    -> TypeInfer.Ty
+    -> a1
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <L,C(U)><L,C(C1(C1(C1(U))))><L,U><S,1*U> -}
+b800e705081100a2b126368bf5855b69
+  type_infer :: TypeInfer.Term -> GHC.Base.Maybe TypeInfer.Ty
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ e :: TypeInfer.Term ->
+                 case TypeInfer.gen_constr
+                        (TypeInfer.Nil @ (TypeInfer.Id, TypeInfer.Ty))
+                        e
+                        TypeInfer.type_infer2 of wild {
+                   GHC.Base.Nothing -> GHC.Base.Nothing @ TypeInfer.Ty
+                   GHC.Base.Just p
+                   -> case p of wild1 { (,) t0 t ->
+                      case t0 of wild2 { TypeInfer.MkState ds d cs ->
+                      case TypeInfer.acc_rect
+                             @ TypeInfer.Constraints
+                             @ (() -> GHC.Base.Maybe TypeInfer.Substitution)
+                             TypeInfer.type_infer1
+                             (d, cs)
+                             (TypeInfer.__ @ ()) of wild3 {
+                        GHC.Base.Nothing -> GHC.Base.Nothing @ TypeInfer.Ty
+                        GHC.Base.Just s0
+                        -> GHC.Base.Just
+                             @ TypeInfer.Ty
+                             (TypeInfer.apply_subst s0 t) } } } }) -}
+f661f2ba145fe4b45a0a975dcb6e6d24
+  type_infer1 ::
+    TypeInfer.Constraints
+    -> ()
+    -> (TypeInfer.Constraints
+        -> () -> () -> GHC.Base.Maybe TypeInfer.Substitution)
+    -> ()
+    -> GHC.Base.Maybe TypeInfer.Substitution
+  {- Arity: 4,
+     Unfolding: (\ x0 :: TypeInfer.Constraints
+                   ds :: ()[OneShot]
+                   x1 :: TypeInfer.Constraints
+                         -> () -> () -> GHC.Base.Maybe TypeInfer.Substitution[OneShot]
+                   ds1 :: () ->
+                 TypeInfer.unify_body x0 x1) -}
+3fd32d3f2ecd0ec01668f90073648498
+  type_infer2 :: TypeInfer.Tc_state
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (TypeInfer.MkState
+                   TypeInfer.O
+                   (TypeInfer.Nil @ TypeInfer.Id)
+                   (TypeInfer.Nil @ (TypeInfer.Ty, TypeInfer.Ty))) -}
+38488a6fee9941bf0eb6a13c078f2d4e
+  unify ::
+    TypeInfer.Constraints -> GHC.Base.Maybe TypeInfer.Substitution
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ l :: TypeInfer.Constraints ->
+                 TypeInfer.acc_rect
+                   @ TypeInfer.Constraints
+                   @ (() -> GHC.Base.Maybe TypeInfer.Substitution)
+                   TypeInfer.type_infer1
+                   l
+                   (TypeInfer.__ @ ())) -}
+6de9852e8387e63ea4e26282388c67af
+  unify_body ::
+    TypeInfer.Constraints
+    -> (TypeInfer.Constraints -> () -> TypeInfer.Unify_type)
+    -> GHC.Base.Maybe TypeInfer.Substitution
+  {- Arity: 2, Strictness: <S(LS),1*U(U,1*U)><L,1*C1(C1(C1(U)))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: TypeInfer.Constraints
+                   w1 :: TypeInfer.Constraints -> () -> TypeInfer.Unify_type ->
+                 case w of ww { (,) ww1 ww2 ->
+                 TypeInfer.$wunify_body ww1 ww2 w1 }) -}
+6050163163c235fbde07df1e14f873d3
+  well_founded_induction ::
+    (a1 -> (a1 -> () -> a2) -> a2) -> a1 -> a2
+  {- Arity: 2, Strictness: <C(C(S)),C(C1(U))><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                TypeInfer.well_founded_induction_type -}
+dd60916170c8fabc8a3f78942d788cd6
+  well_founded_induction_type ::
+    (a1 -> (a1 -> () -> a2) -> a2) -> a1 -> a2
+  {- Arity: 2, Strictness: <C(C(S)),C(C1(U))><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a1 @ a2 x :: a1 -> (a1 -> () -> a2) -> a2 a :: a1 ->
+                 TypeInfer.acc_rect
+                   @ a1
+                   @ a2
+                   (\ x0 :: a1 ds :: ()[OneShot] x1 :: a1 -> () -> a2[OneShot] ->
+                    x x0 x1)
+                   a) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

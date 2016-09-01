@@ -1,0 +1,54 @@
+
+==================== FINAL INTERFACE ====================
+2016-07-22 19:30:35.908828 UTC
+
+interface main@main:Main 7103
+  interface hash: 5a730286cb5d077bc30e3065d47d1667
+  ABI hash: 64df79fad42b6f5b092d34d9db05ccf8
+  export-list hash: 1f196230d46b142ebbd063e2f9b9ee1f
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 2a36ba365fe2093c9d9b097d1fd9b194
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.main
+module dependencies:
+package dependencies: base-4.8.2.0* ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+family instance modules: base-4.8.2.0:Control.Applicative
+                         base-4.8.2.0:Data.Either base-4.8.2.0:Data.Monoid
+                         base-4.8.2.0:Data.Type.Equality base-4.8.2.0:GHC.Generics
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+af2b36a248de583f582751c621a3db6b
+  main :: GHC.Types.IO ()
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+f62b28a6d268640d9622fcde82205d24
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ s :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 (# s, GHC.Tuple.() #)) -}
+0b48c248a879ef9c56f7083ec362638d
+  main2 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

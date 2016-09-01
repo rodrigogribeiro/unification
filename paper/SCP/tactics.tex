@@ -1,0 +1,110 @@
+\section{Automating Proofs}\label{tactics}
+
+Most parts of most proofs used to prove properties of programming
+languages and of algorithms are exercises that consist of a lot of
+somewhat tedious steps, with just a few cases representing the core
+insights. It is not unusual for mechanized proofs to take significant
+amounts of code on uninteresting cases and quite significant effort on
+writing that code. In order to deal with this problem in our
+development, we use $\mathcal{L}$tac, Coq's domain specific language
+for writing custom tactics, and Coq built-in automatic tactic
+\texttt{auto}, which implements a Prolog-like resolution proof
+construction procedure using hint databases within a depth limit.
+
+The main $\mathcal{L}$tac custom tactic used in our development is a
+proof state simplifier that performs several manipulations on the
+hypotheses and on the conclusion. It is defined by means of two
+tactics, called \texttt{mysimp} and \texttt{s}. Tactic \texttt{mysimp}
+tries to reduce the goal and repeatedly applies tactic \texttt{s} to
+the proof state until all goals are solved or a failure occurs.
+
+Tactic \texttt{s}, shown in Figure \ref{simptac}, performs pattern
+matching on a proof state using $\mathcal{L}$tac \texttt{match goal}
+construct. Patterns have the form:
+\[ \texttt{[h$_1$ : t$_1$,h$_2$ : t$_2$ ... |- C ] => tac}\] 
+where each of \texttt{t}$_i$ and \texttt{C} are expressions, which
+represents hypotheses and conclusion, respectively, and \texttt{tac}
+is the tactic that is executed when a successful match
+occurs. Variables with question marks can occur in $\mathcal{L}$tac
+patterns, and can appear in \texttt{tac} without the question
+mark. Names \texttt{h}$_i$ are binding occurrences that can be used in
+\texttt{tac} to refer to a specific hypothesis. Another aspect
+worth mentioning is keyword \texttt{context}. Pattern matching with
+\texttt{context[e]} is successful if \texttt{e} occurs as a
+subexpression of some hypothesis or in the conclusion. In Figure
+\ref{simptac}, we use \texttt{context} to automate case analysis on
+equality tests on identifiers and natural numbers, as shown below
+\begin{lstlisting}
+ [ |- context[eq_id_dec ?a ?b] ] => 
+          destruct (eq_id_dec a b) ; subst ; try congruence
+\end{lstlisting}
+Tactic \texttt{destruct} performs case analysis on a term,
+\texttt{subst} searchs the context for a hypothesis of the form
+\texttt{x = e} or \texttt{e = x}, where \texttt{x} is a variable and
+\texttt{e} is an expression, and replaces all occurrences of
+\texttt{x} by \texttt{e}.
+% Hm? And if e is a program var (say y) ??
+Tactic \texttt{congruence} is a decision
+procedure for equalities with uninterpreted functions and data type
+constructors~\cite{Bertot04}.
+\begin{figure}[H]
+\begin{lstlisting}
+Ltac s :=
+  match goal with
+    | [ H : _ /\ _ |- _] => destruct H
+    | [ H : _ \/ _ |- _] => destruct H
+    | [ |- context[eq_id_dec ?a ?b] ] => 
+             destruct (eq_id_dec a b) ; subst ; try congruence
+    | [ |- context[eq_nat_dec ?a ?b] ] => 
+             destruct (eq_nat_dec a b) ; subst ; try congruence
+    | [ x : (id * ty)%type |- _ ] => 
+             let t := fresh "t" in destruct x as [x t]
+    | [ H : (_,_) = (_,_) |- _] => inverts* H
+    | [ H : Some _ = Some _ |- _] => inverts* H
+    | [ H : Some _ = None |- _] => congruence
+    | [ H : None = Some _ |- _] => congruence
+    | [ |- _ /\ _] => split
+    | [ H : ex _ |- _] => destruct H
+  end.
+
+Ltac mysimp := repeat (simpl; s) ; simpl; auto with arith.
+\end{lstlisting}
+\caption{Main proof state simplifier tactic.}
+\label{simptac}
+\end{figure}
+
+Tactic \texttt{inverts* H} generates necessary conditions used to
+prove \texttt{H} and afterwards executes tactic
+\texttt{auto}.\footnote{This tactic is defined on a tactic library
+  developed by Arthur Charguéraud~\cite{Pierce:SF}.} Tactic
+\texttt{split} divides a conjunction goal in its constituent parts.
+
+Besides $\mathcal{L}$tac scripts, the main tool used to automate
+proofs in our development is tactic \texttt{auto}. This tactic uses a
+relatively simple principle: a database of tactics is repeatedly
+applied to the initial goal, and then to all generated subgoals, until
+all goals are solved or a depth limit is reached.\footnote{The default
+  depth limit used by \texttt{auto} is 5.}  Databases to be used ---
+called {\em hint databases\/} --- can be specified by command
+\texttt{Hint}, which allows declaration of which theorems are part of
+a certain hint database. The general form of this command is:
+\begin{lstlisting}
+Hint Resolve thm1 thm2 ... thmn : db.
+\end{lstlisting}
+where \texttt{thm}$_i$ are defined lemmas or theorems and \texttt{db}
+is the database name to be used. When calling \texttt{auto} a hint
+database can be specified, using keyword \texttt{with}. In Figure
+\ref{simptac}, \texttt{auto} is used with database \texttt{arith} of
+basic Peano arithmetic properties. If no database name is specified,
+theorems are declared to be part of hint database \texttt{core}. Proof
+obligations for termination are filled using lemmas
+\ref{lem-termination-1}, \ref{lem-termination-2} e
+\ref{lem-termination-3} that are included in hint databases. Failures
+of unification, for a given list of constraints \C, is represented by
+\texttt{UnifyFailure} and proof obligations related to failures are
+also handled by \texttt{auto}, thanks to the inclusion of
+\texttt{UnifyFailure} constructors as \texttt{auto} hints using
+command 
+\begin{lstlisting}
+Hint Constructors UnifyFailure.
+\end{lstlisting}

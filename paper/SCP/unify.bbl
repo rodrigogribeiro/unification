@@ -1,0 +1,247 @@
+\begin{thebibliography}{10}
+
+\bibitem{Haskell98}
+Peyton~Jones, S.:
+\newblock {Haskell 98 Language and Libraries: the Revised Report}.
+\newblock (2003)
+
+\bibitem{Milner90}
+Milner, R., Tofte, M., Harper, R.:
+\newblock {The Definition of Standard ML}.
+\newblock MIT Press (1990)
+
+\bibitem{Milner78}
+Milner, R.:
+\newblock {A Theory of Type Polymorphism in Programming}.
+\newblock J. Comput. Syst. Sci. \textbf{17}(3) (1978)  348--375
+
+\bibitem{Pottier05}
+Pottier, F., R{\'{e}}my, D.:
+\newblock {The Essence of {ML} Type Inference}.
+\newblock In Pierce, B.C., ed.: {Advanced Topics in Types and Programming
+  Languages}.
+\newblock MIT Press (2005)  389--489
+
+\bibitem{Robinson65}
+Robinson, J.A.:
+\newblock {A Machine-Oriented Logic Based on the Resolution Principle}.
+\newblock J. ACM \textbf{12}(1) (1965)  23--41
+
+\bibitem{Bertot04}
+Bertot, Y., Cast\'eran, P.:
+\newblock Interactive Theorem Proving and Program Development. Coq'Art: The
+  Calculus of Inductive Constructions.
+\newblock Texts in Theoretical Computer Science. Springer Verlag (2004)
+
+\bibitem{Bove09}
+Bove, A., Dybjer, P., Norell, U.:
+\newblock {A Brief Overview of Agda --- A Functional Language with Dependent
+  Types}.
+\newblock In: Proceedings of the 22nd International Conference on Theorem
+  Proving in Higher Order Logics. TPHOLs '09, Berlin, Heidelberg,
+  Springer-Verlag (2009)  73--78
+
+\bibitem{Paulson93}
+Paulson, L.C.:
+\newblock {Verifying the Unification Algorithm in {LCF}}.
+\newblock CoRR \textbf{cs.LO/9301101} (1993)
+
+\bibitem{Bove99}
+Bove, A.:
+\newblock Programming in {M}artin-{L}\"of type theory: {U}nification - {A}
+  non-trivial example (November 1999) Licentiate Thesis of the Department of
+  Computer Science, Chalmers University of Technology.
+
+\bibitem{McBride03}
+McBride, C.:
+\newblock First-order unification by structural recursion.
+\newblock J. Funct. Program. \textbf{13}(6) (2003)  1061--1075
+
+\bibitem{Kothari10}
+Kothari, S., Caldwell, J.:
+\newblock {A Machine Checked Model of Idempotent MGU Axioms For Lists of
+  Equational Constraints}.
+\newblock In Fernandez, M., ed.: Proceedings 24th International Workshop on
+  Unification. Volume~42 of EPTCS. (2010)  24--38
+
+\bibitem{Mitchell96}
+Mitchell, J.C.:
+\newblock Foundations of Programming Languages.
+\newblock MIT Press, Cambridge, MA, USA (1996)
+
+\bibitem{Pierce02}
+Pierce, B.C.:
+\newblock {Types and programming languages}.
+\newblock MIT Press, Cambridge, MA, USA (2002)
+
+\bibitem{McBride04}
+McBride, C., McKinna, J.:
+\newblock The view from the left.
+\newblock J. Funct. Program. \textbf{14}(1) (2004)  69--111
+
+\bibitem{XLeroy09}
+Leroy, X.:
+\newblock Formal verification of a realistic compiler.
+\newblock Commun. ACM \textbf{52}(7) (2009)  107--115
+
+\bibitem{Barthe02}
+Barthe, G., Dufay, G., Jakubiec, L., de~Sousa, S.M.:
+\newblock {A Formal Correspondence between Offensive and Defensive JavaCard
+  Virtual Machines}.
+\newblock In Cortesi, A., ed.: VMCAI. Volume 2294 of Lecture Notes in Computer
+  Science., Springer (2002)  32--45
+
+\bibitem{Gonthier07}
+Gonthier, G.:
+\newblock {The Four Colour Theorem: Engineering of a Formal Proof}.
+\newblock In Kapur, D., ed.: ASCM. Volume 5081 of Lecture Notes in Computer
+  Science., Springer (2007)  333
+
+\bibitem{Gonthier13}
+Gonthier, G.:
+\newblock Engineering mathematics: the odd order theorem proof.
+\newblock In Giacobazzi, R., Cousot, R., eds.: POPL, ACM (2013)  1--2
+
+\bibitem{RibeiroC15}
+Ribeiro, R., Camar{\~{a}}o, C.:
+\newblock A mechanized textbook proof of a type unification algorithm.
+\newblock In: SBMF, Springer (2015)  127--141
+
+\bibitem{unify-rep}
+Ribeiro, R.,  et~al.:
+\newblock A mechanized textbook proof of a type unification algorithm ---
+  on-line repository.
+\newblock https://github.com/rodrigogribeiro/unification (2015)
+
+\bibitem{CurryHoward06}
+S{\o}rensen, M., Urzyczyn, P.:
+\newblock Lectures on the Curry-Howard Isomorphism.
+\newblock Number v. 10 in Studies in Logic and the Foundations of Mathematics.
+  Elsevier (2006)
+
+\bibitem{Chlipala13}
+Chlipala, A.:
+\newblock Certified Programming with Dependent Types - {A} Pragmatic
+  Introduction to the Coq Proof Assistant.
+\newblock {MIT} Press (2013)
+
+\bibitem{Letouzey02}
+Letouzey, P.:
+\newblock {A New Extraction for Coq}.
+\newblock In: Proceedings of the 2002 International Conference on Types for
+  Proofs and Programs. TYPES'02, Berlin, Heidelberg, Springer-Verlag (2003)
+  200--219
+
+\bibitem{Swierstra12}
+Swierstra, W.:
+\newblock {Xmonad in Coq (Experience Report): Programming a Window Manager in a
+  Proof Assistant}.
+\newblock SIGPLAN Not. \textbf{47}(12) (September 2012)  131--136
+
+\bibitem{Aydemir08}
+Aydemir, B.E., Chargu{\'e}raud, A., Pierce, B.C., Pollack, R., Weirich, S.:
+\newblock Engineering formal metatheory.
+\newblock In Necula, G.C., Wadler, P., eds.: POPL, ACM (2008)  3--15
+
+\bibitem{Chlipala08}
+Chlipala, A.:
+\newblock Parametric higher-order abstract syntax for mechanized semantics.
+\newblock SIGPLAN Not. \textbf{43}(9) (September 2008)  143--156
+
+\bibitem{Hindley08}
+Hindley, J.R., Seldin, J.P.:
+\newblock Lambda-Calculus and Combinators: An Introduction. 2 edn.
+\newblock Cambridge University Press, New York, NY, USA (2008)
+
+\bibitem{coq}
+{{C}oq {D}evelopement {T}eam}:
+\newblock {Coq Proof Assistant --- Reference Manual}.
+\newblock {\tt {\small http://coq.inria.fr/distrib/current/refman/ /}} (2014)
+
+\bibitem{Claessen00}
+Claessen, K., Hughes, J.:
+\newblock {QuickCheck: A Lightweight Tool for Random Testing of Haskell
+  Programs}.
+\newblock In: Proceedings of the Fifth ACM SIGPLAN International Conference on
+  Functional Programming. ICFP '00, New York, NY, USA, ACM (2000)  268--279
+
+\bibitem{Pierce:SF}
+Pierce, B.C., Casinghino, C., Gaboardi, M., Greenberg, M., Hri\c{t}cu, C.,
+  Sjoberg, V., Yorgey, B.:
+\newblock Software Foundations.
+\newblock Electronic textbook (2015)
+
+\bibitem{Nordstrom88}
+Nordstr{\"{o}}m, B.:
+\newblock {Terminating General Recursion}.
+\newblock {BIT Numerical Mathematics} \textbf{28}(3) (1988)  605--619
+
+\bibitem{McBride03Rep}
+McBride, C.:
+\newblock {First-order unification by structural recursion --- Correctness
+  proof}
+
+\bibitem{Naraschewski99}
+Naraschewski, W., Nipkow, T.:
+\newblock {Type Inference Verified: Algorithm W in Isabelle/HOL}.
+\newblock J. Autom. Reason. \textbf{23}(3) (November 1999)  299--318
+
+\bibitem{AvelarMGA10}
+Avelar, A.B., de~Moura, F.L.C., Galdino, A.L., Ayala{-}Rinc{\'{o}}n, M.:
+\newblock {Verification of the Completeness of Unification Algorithms {\`{a}}
+  la Robinson}.
+\newblock In Dawar, A., de~Queiroz, R.J.G.B., eds.: Logic, Language,
+  Information and Computation, 17th International Workshop, WoLLIC 2010,
+  Brasilia, Brazil, July 6-9, 2010. Proceedings. Volume 6188 of Lecture Notes
+  in Computer Science., Springer (2010)  110--124
+
+\bibitem{AvelarGMA14}
+Avelar, A.B., Galdino, A.L., de~Moura, F.L.C., Ayala{-}Rinc{\'{o}}n, M.:
+\newblock {First-order unification in the {PVS} proof assistant}.
+\newblock Logic Journal of the {IGPL} \textbf{22}(5) (2014)  758--789
+
+\bibitem{DuboisM99}
+Dubois, C., M{\'{e}}nissier{-}Morain, V.:
+\newblock {Certification of a Type Inference Tool for {ML:} Damas-Milner within
+  Coq}.
+\newblock J. Autom. Reasoning \textbf{23}(3-4) (1999)  319--346
+
+\bibitem{NaraschewskiN-JAR}
+Naraschewski, W., Nipkow, T.:
+\newblock Type inference verified: Algorithm {W} in {Isabelle/HOL}.
+\newblock Journal of Automated Reasoning \textbf{23} (1999)  299--318
+
+\bibitem{Nazareth-Nipkow}
+Nazareth, D., Nipkow, T.:
+\newblock {Formal Verification of Algorithm {W}: The Monomorphic Case}.
+\newblock In von Wright, J., Grundy, J., Harrison, J., eds.: Theorem Proving in
+  Higher Order Logics (TPHOLs'96). Volume 1125. (1996)  331--346
+
+\bibitem{UrbanN2009}
+Urban, C., Nipkow, T.:
+\newblock {Nominal verification of algorithm {W}}.
+\newblock In Huet, G., Lévy, J.J., Plotkin, G., eds.: From Semantics to
+  Computer Science. Essays in Honour of Gilles Kahn.
+\newblock Cambridge University Press (2009)  363--382
+
+\bibitem{Garrigue10}
+Garrigue, J.:
+\newblock A certified implementation of {ML} with structural polymorphism.
+\newblock In Ueda, K., ed.: Programming Languages and Systems - 8th Asian
+  Symposium, {APLAS} 2010, Shanghai, China, November 28 - December 1, 2010.
+  Proceedings. Volume 6461 of Lecture Notes in Computer Science., Springer
+  (2010)  360--375
+
+\bibitem{Garrigue15}
+Garrigue, J.:
+\newblock A certified implementation of {ML} with structural polymorphism and
+  recursive types.
+\newblock Mathematical Structures in Computer Science \textbf{25}(4) (2015)
+  867--891
+
+\bibitem{Chargueraud12}
+Charguéraud, A.:
+\newblock {The Locally Nameless Representation}.
+\newblock J. Autom. Reasoning \textbf{49}(3) (2012)  363--408
+
+\end{thebibliography}

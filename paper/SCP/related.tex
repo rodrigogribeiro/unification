@@ -1,0 +1,107 @@
+\section{Related Work}\label{related}
+
+\paragraph{Formalizations of unification algorithms:}
+Formalization of unification algorithms has been the subject of
+several research works~\ccite{Paulson93,Bove99,McBride03,Kothari10}.
+
+In Paulson's work~\ccite{Paulson93} the representation of terms, built
+by using a binary operator, uses equivalence classes of finite lists
+where order and multiplicity of elements is considered irrelevant,
+deviating from simple textbook unification algorithms
+(\ccite{Pierce02,Mitchell96}).
+
+Bove's formalization of unification~\ccite{Bove99} starts from a
+Haskell implementation and describes how to convert it into a term
+that can be executed in type theory by acquiring an extra termination
+argument (a proof of termination for the actual input) and a proof
+obligation (that all possible inputs satisfy this termination
+argument).  This extra termination argument is an inductive type whose
+constructors and indices represent the call graph of the defined
+unification function. Bove's technique can be seen as a specific
+implementation of the technique for general recursion based on well
+founded relations~\ccite{Nordstrom88}, which is the one implemented on
+Coq's standard library, used in our implementation.  Also, Bove
+presents soundness and completeness proofs for its implementation
+together with the function definition (as occurs with our
+implementation) as well as by providing theorems separated from the
+actual definitions. She argues that the first formalization avoids
+code duplication since soundness and completeness proofs follow the
+same recursive structure of the unification function. Bove's
+implementation is given in Alf, a dependently typed programming
+language developed at Chalmers that is currently unsupported.
+
+McBride~\ccite{McBride03} develops a unification function that is
+structurally recursive on the number of non-unified variables on terms
+being unified. The idea of its termination argument is that at each
+step the unification algorithm gets rid of one unresolved variable
+from terms, a property that is carefully represented with dependent
+types. Soundness and completeness proofs are given as separate
+theorems in a technical report~\ccite{McBride03Rep}. McBride's
+implementation is done on \texttt{OLEG}, a dependently typed
+programming language that is nowadays also unsupported.
+
+Kothari~\ccite{Kothari10} describes an implementation of a unification
+function in Coq and proves some properties of most general
+unifiers. Such properties are used to postulate that unification
+function does produce most general unifiers on some formalizations of
+type inference algorithms in type
+theory~\ccite{Naraschewski99}. Kothari's implementation does not use
+any kind of scripted proof automation and it uses the experimental
+command \texttt{Function} in order to generate an induction principle
+from its unification function structure. He uses this induction
+principle to prove properties of the defined unification function.
+
+Avelar et al.'s proof of completeness~\ccite{AvelarMGA10} is not
+focused on the proof that the unifier $S$ of types $\overline{\tau}$,
+returned by the unification algorithm, is the least of all existing
+unifiers of $\overline{\tau}$.  It involves instead properties that
+specify: i) $\dom(S) \subseteq \fv(\overline{\tau})$, ii) the
+contra-domain of $S$ is a subset of $\fv(\overline{\tau}) - \dom(S)$,
+and iii) if the unification algorithm fails then there is no
+unifier. The proofs involve a quite large piece of code, and the
+program does not follow simple textbook unification algorithms. The
+proofs are based instead on concepts like the first position of
+conflict between terms (types) and on resolution of conflicts. More
+recent work of Avelar et al.~\cite{AvelarGMA14} extends the previous
+formalization by the description of a more elaborate and efficient
+first-order unification algorithm. The described algorithm navigates
+the tree structure of the two terms being unified in such a way that,
+if the two terms are not unifiable then, after the difference at the
+first position of conflict between the terms is eliminated through a
+substitution, the search of a possible next position of conflict is
+computed through application of auxiliary functions starting from the
+previous position.
+
+\paragraph{Formalization of type inference algorithms:} Most works on formalizing
+type inference algorithms focus on (or some variant of) Damas-Milner type system
+(c.f.~\cite{DuboisM99,NaraschewskiN-JAR,Nazareth-Nipkow,UrbanN2009,Garrigue10,Garrigue15}).
+
+The first works on formalizing type inference are by Nazareth and
+Narascewski in Isabelle/HOL~\cite{NaraschewskiN-JAR,Nazareth-Nipkow}.
+Both works focus on formalizing the well-known algorithm
+W~\cite{Milner78}, but unlike our work, they don't provide a verified
+implementation of unification. They assume all the necessary
+unification properties to finish their certification of type
+inference. The work of Dubois~\cite{DuboisM99} also postulates
+unification and prove properties of type inference for ML using the
+Coq proof assistant system.  Nominal techniques were used by
+Urban~\cite{UrbanN2009} to certify algorithm W in Isabelle/HOL using
+the Nominal package. As in other works, Urban just assumes properties
+that the unification algorithm should have without formalizing it.
+
+Full formalizations of type inference for ML with structural
+polymorphism was reported by Jacques
+Garrigue~\cite{Garrigue10,Garrigue15}. He fully formalizes
+interpreters for fragments of the OCaml programming language. Since
+the type system of OCaml is far more elaborate than STLC, his work
+involves a more substantial formalization effort than the one reported
+in this work. Garrigue's formalization of unification avoids the
+construction of a well-founded relation for constraints by defining
+the algorithm by using a ``bound'' on the number of allowed recursive
+calls made.  Also, he uses libraries for dealing with bindings using
+the so-called locally nameless approach~\cite{Chargueraud12}.
+
+%The authors claim that this strategy is more efficient than the one
+%used by Robinson's unification algorithm. The developed PVS theories
+%were used to prove the Knuth-Bendix(-Huet) critical pair
+%theorem~\cite{GaldinoA10}.

@@ -1,0 +1,88 @@
+\subsection{Soundness and Completeness Proof}\label{soundness}
+
+Given an arbitrary list of constraints, the unification algorithm
+either fails or returns its most general unifier. We have the
+following properties:
+\begin{itemize}
+    \item Soundness: the substitution produced is a unifier of the constraints.
+
+    \item Completeness: the returned substitution is the least
+      unifier, according to the substitution ordering defined in
+      Section \ref{substitution}.
+\end{itemize}
+
+A substitution $S$ is called a unifier of a list of constraints
+$\mathbb{C}$ according to whether $\unifier(\mathbb{C},S)$ is provable,
+where $\unifier(\mathbb{C},S)$ is defined by induction on $\mathbb{C}$
+as follows:
+
+\[ \begin{array}{lcl}
+     \unifier([],S)                             & = & \True \\
+     \unifier((\tau\eeq\tau') :: \mathbb{C}',S) & = & S(\tau) = S(\tau') \land \unifier(\mathbb{C}',S)
+  \end{array} 
+\]
+
+\newcommand{\least}{\text{\it least\/}}
+
+A substitution $S$ is a most general unifier of a list of constraints
+$\mathbb{C}$ if, for any other unifier $S'$ of $\mathbb{C}$, there
+exists $S_1$ such that $S' = S_1 \circ S$; formally:
+
+\[
+  \least(S,\mathbb{C}) = 
+    \forall S'.\,\unifier(\mathbb{C},S') \to 
+       \exists S_1.\, \forall \alpha.\,(S_1 \circ S)(\alpha) = S'(\alpha)
+\]
+The type of the unification function is a dependent type that ensures
+the following property of the returned substitution $S$:
+
+\[ \bigl(\unifier(\mathbb{C},S) \land 
+    \least(S,\mathbb{C})\bigr) \lor \text{UnifyFailure($\mathbb{C}$)}
+\]
+where UnifyFailure($\mathbb{C}$) is a type that encodes the reason why
+unification of $\mathbb{C}$ fails. There are two possible causes of
+failure: 1) an occurs check error, 2) an error caused by trying to
+unify distinct type constructors.
+
+In the formalization source code, the definition of the $\unify$ function
+contains ``holes''\footnote{A
+  hole in a function definition is a subterm that is left
+  unspecified. In Coq, holes are represented by underscores and such
+  unspecified parts of a definition are usually filled by tactic
+  generated terms.} to mark positions where proof terms are
+expected. Instead of writing such proof terms, we left them
+unspecified and use tactics to fill them with appropriate proofs. In
+the companion source code, the unification function is full of such
+holes and they mark the position of proof obligations for soundness,
+completeness and termination for each equation of the definition of
+$\unify$.
+
+In order to prove soundness obligations we define several small lemmas
+that are direct consequences of the definition of the application of
+substitutions, which are omitted for brevity. Other lemmas necessary
+to ensure soundness are presented below. They specify properties of
+unification and application of substitutions.
+
+\begin{Lemma}\label{unifyty}
+For all type variables $\alpha$, types $\tau,\tau'$ and substitutions
+$S$, if $S(\alpha) = S(\tau')$ then $S(\tau) = S([\alpha \mapsto
+  \tau']\,\tau)$.
+\end{Lemma}
+\begin{proof}
+Induction over the structure of $\tau$.
+\end{proof}
+
+\begin{Lemma}
+For all type variables $\alpha$, types $\tau$, variable contexts
+$\mathcal{V}$ and constraint sets $\mathbb{C}$, if $S(\alpha) = S(\tau)$
+and $\unifier(\mathbb{C},S)$ then
+$\unifier([\alpha\mapsto\tau]\,\mathbb{C},S)$.
+\end{Lemma}
+\begin{proof}
+Induction over $\mathbb{C}$ using Lemma \ref{unifyty}.
+\end{proof}
+
+Completeness proof obligations are filled by scripted automatic proof tactics
+using Lemma \ref{extsubst}.
+
+%\input{tactics}

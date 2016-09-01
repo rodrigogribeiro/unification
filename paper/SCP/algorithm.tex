@@ -1,0 +1,54 @@
+\section{The Unification Algorithm}\label{algorithm-section}
+
+We use the following standard presentation of the first-order
+unification algorithm, where $\tau\equiv\tau'$ denotes a decidable
+equality test between $\tau$ and $\tau'$:
+
+\begin{figure}
+\[
+\small{
+\begin{array}{ll}
+(1) & \unify([\: ]) = [\: ]\\
+(2) & \unify((\alpha \eeq \alpha) :: \mathbb{C}) = \unify(\mathbb{C})\\
+(3) & \unify((\alpha \eeq\tau) :: \mathbb{C}) = 
+      \If \occurs(\alpha,\tau) \Then \fail \Else \unify([\alpha\mapsto\tau]\mathbb{C})\circ [\alpha \mapsto \tau]\\
+(4) & \unify((\tau \eeq\alpha) :: \mathbb{C}) = 
+      \If \occurs(\alpha,\tau) \Then \fail \Else \unify([\alpha\mapsto\tau]\mathbb{C})\circ [\alpha \mapsto \tau]\\
+(5) & \unify((\tau_1\to\tau_2 \eeq \tau\to\tau')::\mathbb{C}) = 
+      \unify((\tau_1\eeq\tau)::(\tau_2\eeq\tau')::\mathbb{C}) \\
+(6) & \unify((\tau \eeq \tau')::\mathbb{C}) = \If \tau\equiv\tau' \Then \unify(\mathbb{C}) \Else \fail 
+\end{array}}
+\]
+\caption{Unification algorithm.}
+\label{unifyalgorithm}
+\end{figure}
+
+Our formalization differs from the presented algorithm (Figure
+\ref{unifyalgorithm}) in two aspects:
+\begin{enumerate}
+     \item Since this presentation of the unification algorithm is
+       general recursive, i.e.~there are recursive calls that are not
+       made on structurally smaller arguments, we need to define it
+       using recursion on proofs that $\unify$'s arguments form a
+       well-founded relation~\ccite{Bertot04}.
+    \item Instead of returning just a substitution that represents the
+      argument constraint unifier, we return a proof that such
+      substitution is indeed its most general unifier or a proof
+      explaining that such unifier does not exist, when $\unify$
+      fails.
+\end{enumerate}
+
+These two aspects are discussed in Sections \ref{termination} and
+\ref{soundness}, respectively.
+
+It is worth mentioning that there are some Coq extensions that make
+the definitions of general recursive functions and functions defined
+by pattern matching on dependent types easier, namely commands
+\texttt{Function} and \texttt{Program}, respectively. However,
+according to the Coq reference manual \cite{coq}, these are
+experimental extensions. Thus, we prefer to use well established
+approaches to overcome these problems: 1) use of a recursion principle
+derived from the definition of a well-founded
+relation~\ccite{Bertot04} and 2) annotate every pattern matching
+construct in order to make explicit the relation between function
+argument and return types.

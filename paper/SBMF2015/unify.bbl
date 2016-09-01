@@ -1,0 +1,174 @@
+\begin{thebibliography}{10}
+
+\bibitem{Haskell98}
+Peyton~Jones, S.:
+\newblock {Haskell 98 Language and Libraries: the Revised Report}.
+\newblock (2003)
+
+\bibitem{Milner90}
+Milner, R., Tofte, M., Harper, R.:
+\newblock Definition of standard ML.
+\newblock MIT Press (1990)
+
+\bibitem{Milner78}
+Milner, R.:
+\newblock A theory of type polymorphism in programming.
+\newblock J. Comput. Syst. Sci. \textbf{17}(3) (1978)  348--375
+
+\bibitem{Pottier05}
+Pottier, F., R{\'{e}}my, D.:
+\newblock The essence of {ML} type inference.
+\newblock In Pierce, B.C., ed.: Advanced Topics in Types and Programming
+  Languages.
+\newblock MIT Press (2005)  389--489
+
+\bibitem{Robinson65}
+Robinson, J.A.:
+\newblock A machine-oriented logic based on the resolution principle.
+\newblock J. ACM \textbf{12}(1) (1965)  23--41
+
+\bibitem{Bertot04}
+Bertot, Y., Cast\'eran, P.:
+\newblock Interactive Theorem Proving and Program Development. Coq'Art: The
+  Calculus of Inductive Constructions.
+\newblock Texts in Theoretical Computer Science. Springer Verlag (2004)
+
+\bibitem{Bove09}
+Bove, A., Dybjer, P., Norell, U.:
+\newblock A brief overview of agda --- a functional language with dependent
+  types.
+\newblock In: Proceedings of the 22nd International Conference on Theorem
+  Proving in Higher Order Logics. TPHOLs '09, Berlin, Heidelberg,
+  Springer-Verlag (2009)  73--78
+
+\bibitem{Paulson93}
+Paulson, L.C.:
+\newblock Verifying the unification algorithm in lcf.
+\newblock CoRR \textbf{cs.LO/9301101} (1993)
+
+\bibitem{Bove99}
+Bove, A.:
+\newblock Programming in {M}artin-{L}\"of type theory: {U}nification - {A}
+  non-trivial example (November 1999) Licentiate Thesis of the Department of
+  Computer Science, Chalmers University of Technology.
+
+\bibitem{McBride03}
+McBride, C.:
+\newblock First-order unification by structural recursion.
+\newblock J. Funct. Program. \textbf{13}(6) (2003)  1061--1075
+
+\bibitem{Kothari10}
+Kothari, S., Caldwell, J.:
+\newblock A machine checked model of idempotent mgu axioms for lists of
+  equational constraints.
+\newblock In Fernandez, M., ed.: Proceedings 24th International Workshop on
+  Unification. Volume~42 of EPTCS. (2010)  24--38
+
+\bibitem{Mitchell96}
+Mitchell, J.C.:
+\newblock Foundations of Programming Languages.
+\newblock MIT Press, Cambridge, MA, USA (1996)
+
+\bibitem{Pierce02}
+Pierce, B.C.:
+\newblock Types and programming languages.
+\newblock MIT Press, Cambridge, MA, USA (2002)
+
+\bibitem{McBride04}
+McBride, C., McKinna, J.:
+\newblock The view from the left.
+\newblock J. Funct. Program. \textbf{14}(1) (2004)  69--111
+
+\bibitem{XLeroy09}
+Leroy, X.:
+\newblock Formal verification of a realistic compiler.
+\newblock Commun. ACM \textbf{52}(7) (2009)  107--115
+
+\bibitem{Barthe02}
+Barthe, G., Dufay, G., Jakubiec, L., de~Sousa, S.M.:
+\newblock A formal correspondence between offensive and defensive javacard
+  virtual machines.
+\newblock In Cortesi, A., ed.: VMCAI. Volume 2294 of Lecture Notes in Computer
+  Science., Springer (2002)  32--45
+
+\bibitem{Gonthier07}
+Gonthier, G.:
+\newblock The four colour theorem: Engineering of a formal proof.
+\newblock In Kapur, D., ed.: ASCM. Volume 5081 of Lecture Notes in Computer
+  Science., Springer (2007)  333
+
+\bibitem{Gonthier13}
+Gonthier, G.:
+\newblock Engineering mathematics: the odd order theorem proof.
+\newblock In Giacobazzi, R., Cousot, R., eds.: POPL, ACM (2013)  1--2
+
+\bibitem{unify-rep}
+Ribeiro, R.,  et~al.:
+\newblock A mechanized textbook proof of a type unification algorithm ---
+  on-line repository.
+\newblock https://github.com/rodrigogribeiro/unification (2015)
+
+\bibitem{CurryHoward06}
+S{\o}rensen, M., Urzyczyn, P.:
+\newblock Lectures on the Curry-Howard Isomorphism.
+\newblock Number v. 10 in Studies in Logic and the Foundations of Mathematics.
+  Elsevier (2006)
+
+\bibitem{Chlipala13}
+Chlipala, A.:
+\newblock Certified Programming with Dependent Types - {A} Pragmatic
+  Introduction to the Coq Proof Assistant.
+\newblock {MIT} Press (2013)
+
+\bibitem{deBruijn72}
+de~Bruijn, N.:
+\newblock Lambda calculus notation with nameless dummies, a tool for automatic
+  formula manipulation, with application to the church-rosser theorem.
+\newblock Indagationes Mathematicae (Proceedings) \textbf{75}(5) (1972)  381 --
+  392
+
+\bibitem{locally}
+Chargu{\'e}raud, A.:
+\newblock The locally nameless representation.
+\newblock J. Autom. Reasoning \textbf{49}(3) (2012)  363--408
+
+\bibitem{coq}
+{{C}oq {D}evelopement {T}eam}:
+\newblock {Coq Proof Assistant --- Reference Manual}.
+\newblock {\tt {\small http://coq.inria.fr/distrib/current/refman/ /}} (2014)
+
+\bibitem{Pierce:SF}
+Pierce, B.C., Casinghino, C., Gaboardi, M., Greenberg, M., Hri\c{t}cu, C.,
+  Sjoberg, V., Yorgey, B.:
+\newblock Software Foundations.
+\newblock Electronic textbook (2015)
+
+\bibitem{Nordstrom88}
+Nordstr{\"{o}}m, B.:
+\newblock Terminating general recursion.
+\newblock {BIT Numerical Mathematics} \textbf{28}(3) (1988)  605--619
+
+\bibitem{McBride03Rep}
+McBride, C.:
+\newblock First-order unification by structural recursion --- correctness proof
+
+\bibitem{Naraschewski99}
+Naraschewski, W., Nipkow, T.:
+\newblock Type inference verified: Algorithm w in isabelle/hol.
+\newblock J. Autom. Reason. \textbf{23}(3) (November 1999)  299--318
+
+\bibitem{AvelarMGA10}
+Avelar, A.B., de~Moura, F.L.C., Galdino, A.L., Ayala{-}Rinc{\'{o}}n, M.:
+\newblock Verification of the completeness of unification algorithms {\`{a}} la
+  robinson.
+\newblock In Dawar, A., de~Queiroz, R.J.G.B., eds.: Logic, Language,
+  Information and Computation, 17th International Workshop, WoLLIC 2010,
+  Brasilia, Brazil, July 6-9, 2010. Proceedings. Volume 6188 of Lecture Notes
+  in Computer Science., Springer (2010)  110--124
+
+\bibitem{AvelarGMA14}
+Avelar, A.B., Galdino, A.L., de~Moura, F.L.C., Ayala{-}Rinc{\'{o}}n, M.:
+\newblock First-order unification in the {PVS} proof assistant.
+\newblock Logic Journal of the {IGPL} \textbf{22}(5) (2014)  758--789
+
+\end{thebibliography}
