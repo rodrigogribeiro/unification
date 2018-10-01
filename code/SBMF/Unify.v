@@ -53,7 +53,7 @@ Ltac s :=
     | [ H : Some _ = Some _ |- _] => inverts* H
     | [ H : Some _ = None |- _] => congruence
     | [ H : None = Some _ |- _] => congruence
-    | [ |- _ /\ _] => split
+    | [ |- _ /\ _] => split ~
     | [ H : ex _ |- _] => destruct H
   end.
 
@@ -218,6 +218,13 @@ Fixpoint sub (t1 : ty) (x : id) (t2 : ty) : ty :=
     | con n => con n
     | app l r => app (sub t1 x l) (sub t1 x r)
   end.
+
+Lemma sub_app_dist : forall t v t0 t1, app (sub t v t0) (sub t v t1) = sub t v (app t0 t1).
+Proof.
+  intros.
+  simpl.
+  reflexivity.
+Qed.
 
 (** Removing a variable from a variable context *)
 
@@ -619,7 +626,7 @@ Definition unify_body (l : constraints)
                     + {UnifyFailure l} with
                 | left _ =>
                        match unify (mk_constraints C l') _ _ with
-                        | inleft (exist s _) =>  inleft _ (@exist substitution _ s _)
+                        | inleft (exist _ s _) =>  inleft _ (@exist substitution _ s _)
                         | inright _ => inright _ _
                       end
                 | right _ =>
@@ -636,7 +643,7 @@ Definition unify_body (l : constraints)
                                 | right _ =>
                                     match unify (mk_constraints (minus C (v :: nil))
                                                 (apply_subst_constraint ((v,t) :: nil) l')) _ _ with
-                                      | inleft (exist s _) => inleft _ (@exist substitution _ ((v,t) :: s) _ )
+                                      | inleft (exist _ s _) => inleft _ (@exist substitution _ ((v,t) :: s) _ )
                                       | inright _ => inright _ _
                                     end
                               end
@@ -647,7 +654,7 @@ Definition unify_body (l : constraints)
                                 | right _ =>
                                     match unify (mk_constraints (minus C (v :: nil))
                                                 (apply_subst_constraint ((v,t) :: nil) l')) _ _ with
-                                      | inleft (exist s _) => inleft _ (@exist substitution _ ((v,t) :: s) _ )
+                                      | inleft (exist _ s _) => inleft _ (@exist substitution _ ((v,t) :: s) _ )
                                       | inright _ => inright _ _
                                     end
                               end
@@ -660,7 +667,7 @@ Definition unify_body (l : constraints)
                         | app l1 r, app l1' r' =>
                             fun H1 H2 =>
                               match unify (mk_constraints C ((l1,l1') :: (r,r') :: l')) _ _ with
-                                | inleft (exist s _)  => inleft _ (@exist substitution _ s _)
+                                | inleft (exist _ s _)  => inleft _ (@exist substitution _ s _)
                                 | inright _ => inright _ _
                               end
                     end (refl_equal t) (refl_equal t')
@@ -692,9 +699,23 @@ Definition unify_body (l : constraints)
                        destruct (H1 _ Hu) as [sa Ha] ; eexists ; intros ; case_if* ; substs ;
                        try rewrite H ; eapply ext_subst_var_ty in Ha ; eauto
              end) ; try (apply wf_constr_list_remove ; auto ; splits*).
+                         apply f_equal. info_auto.
+                         apply wf_constr_list_remove ; auto.
+                         mysimp.
+                         apply f_equal.
+                         rewrite sub_app_dist.
+                         symmetry.
+                         eapply sub_occurs.
+                         intro.
+                         intuition.
+
 Defined.
 
 Definition unify : forall l : constraints, unify_type l :=
   well_founded_induction well_founded_constraints_lt unify_type unify_body.
       
-Extraction Language Haskell. Recursive Extraction unify.
+Require Extraction.
+
+Extraction Language Haskell.
+
+Recursive Extraction unify.
